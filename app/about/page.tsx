@@ -50,7 +50,7 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* History */}
+      {/* History - English */}
       <section className="bg-card/50 py-16 lg:py-20">
         <div className="mx-auto max-w-4xl px-4 lg:px-8">
           <h2 className="font-serif text-2xl font-bold text-foreground md:text-3xl">
@@ -73,6 +73,32 @@ export default function AboutPage() {
               Today, modern AI technology allows us to analyze these patterns with unprecedented accuracy, combining
               centuries of traditional knowledge with advanced image recognition and astrological computation to
               deliver personalized predictions.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      {/* History - Hindi */}
+      <section className="py-16 lg:py-20">
+        <div className="mx-auto max-w-4xl px-4 lg:px-8">
+          <h2 className="font-serif text-2xl font-bold text-foreground md:text-3xl mb-6">
+            हस्तरेखा विज्ञान: 5,000 साल की यात्रा
+          </h2>
+          <div className="mt-6 flex flex-col gap-4 text-muted-foreground leading-relaxed">
+            <p>
+              हस्तरेखा विज्ञान (Hastrekha Vigyan) भारत की प्राचीन वैदिक परंपरा का एक महत्वपूर्ण हिस्सा है। यह विज्ञान हजारों वर्षों पहले भारत में उत्पन्न हुआ, जहां ऋषि और विद्वान मानव हाथ की रेखाओं, आकृति और मांउंटों का अध्ययन करके भाग्य के रहस्यों को समझते थे। वेद और उपनिषदों में हस्तरेखा विज्ञान के संदर्भ मिलते हैं, जो इस प्राचीन ज्ञान की पवित्रता को दर्शाता है।
+            </p>
+            <p>
+              महान ऋषि वाल्मीकि, जो रामायण के लेखक हैं, को हस्तरेखा विज्ञान की नींव रखने का श्रेय दिया जाता है। उनकी पुस्तक "शास्त्र समुद्रिका" एशिया भर में हस्तरेखा पाठकों के लिए एक महत्वपूर्ण ग्रंथ बनी। मौर्य साम्राज्य और बाद के राजवंशों में, राजा और प्रभुशाली लोग महत्वपूर्ण निर्णय लेने से पहले हस्तरेखा विशेषज्ञों की सलाह लेते थे।
+            </p>
+            <p>
+              हस्तरेखा विज्ञान में मान्यता है कि आपके हाथों की रेखाएं आपकी आत्मा का एक नक्शा हैं। प्रत्येक रेखा आपके व्यक्तित्व, भाग्य, और जीवन के विभिन्न पहलुओं को दर्शाती है। आपके जन्म समय के ग्रहों की स्थिति और आपके जीवन के दौरान किए गए निर्णय इन रेखाओं को आकार देते हैं। यह एक गहरा और पवित्र विज्ञान है जो शारीरिक और आध्यात्मिक दोनों पहलुओं को समझता है।
+            </p>
+            <p>
+              हस्तरेखा विज्ञान में पांच मुख्य रेखाएं होती हैं: जीवन रेखा (Life Line), सिर की रेखा (Head Line), हृदय रेखा (Heart Line), भाग्य रेखा (Fate Line), और सूर्य रेखा (Sun Line)। प्रत्येक रेखा का अपना महत्व है और आपके जीवन के विभिन्न क्षेत्रों को नियंत्रित करती है। इसके अलावा, हाथ के विभिन्न मांउंटों (तालियों) पर ग्रहों का प्रभाव होता है।
+            </p>
+            <p>
+              आज के समय में, आर्टिफिशियल इंटेलिजेंस (AI) और आधुनिक तकनीक के साथ, हस्तरेखा विज्ञान को एक नई दिशा मिली है। HastRekhaAi प्राचीन वैदिक ज्ञान को अत्याधुनिक AI प्रौद्योगिकी के साथ जोड़ता है, जिससे अधिक सटीक और विश्वसनीय भविष्यवाणियां संभव हो गई हैं। यह संयोजन परंपरा और आधुनिकता के बीच एक सेतु बनाता है।
             </p>
           </div>
         </div>

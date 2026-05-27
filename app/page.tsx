@@ -9,6 +9,7 @@ import { DashboardSection } from "@/components/home/dashboard-section";
 import { InlinePalmForm } from "@/components/home/inline-palm-form";
 import { FeaturesSection } from "@/components/home/features-section";
 import { CTASection } from "@/components/home/cta-section";
+import { TodaysRashifal } from "@/components/home/todays-rashifal";
 
 export default function HomePage() {
   return (
@@ -18,6 +19,8 @@ export default function HomePage() {
         <HeroSection />
         <NameSection />
         <DashboardSection />
+        {/* Today's Rashifal Section */}
+        <TodaysRashifal />
         {/* Inline Palm Reading Form */}
         <section className="py-16 px-4 lg:px-8 lg:py-24 bg-gradient-to-b from-card/50 to-background">
           <div className="container mx-auto">
