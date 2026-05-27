@@ -29,14 +29,12 @@ import type { PredictionReport } from "@/lib/prediction-engine";
 
 interface ReportViewProps {
   report: PredictionReport;
-  reportHi: PredictionReport;
   userName: string;
   onNewReading: () => void;
 }
 
 export function ReportView({
   report,
-  reportHi,
   userName,
   onNewReading,
 }: ReportViewProps) {
