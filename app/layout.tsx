@@ -15,16 +15,34 @@ const playfair = Playfair_Display({
 });
 
 export const metadata: Metadata = {
-  title: "HastRekhaAi - AI Palm Reading & Astrology Predictions | Hastrekha Vigyan",
+  title: "HastRekhaAI - AI Palm Reading & Astrology Predictions | Hastrekha Vigyan",
   description:
-    "Get AI-powered palm reading and astrology predictions. Upload your palm image and birth details for a personalized life report based on Hastrekha Vigyan. Free kundli analysis online.",
+    "Get AI-powered palm reading and astrology predictions based on Hastrekha Vigyan. Upload your palm image and birth details for personalized life insights. Free online palm analysis from ancient Indian palmistry tradition.",
   keywords:
-    "palm reading online, AI palmistry, future prediction by hand, astrology life prediction, free kundli analysis, hastrekha vigyan online",
+    "palm reading online, AI palmistry, hastrekha vigyan, palm analysis, astrology predictions, future prediction, kundli analysis, palmistry online, palm lines reading, hand analysis",
+  applicationName: "HastRekhaAI",
+  creator: "HastRekhaAI Team",
+  publisher: "HastRekhaAI",
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
+  },
   openGraph: {
-    title: "HastRekhaAi - AI Palm Reading & Astrology Predictions",
+    title: "HastRekhaAI - AI Palm Reading & Astrology Predictions",
     description:
-      "Get AI-powered palm reading and astrology predictions. Upload your palm image for a personalized life report.",
+      "Discover your destiny through AI-powered palm reading based on ancient Hastrekha Vigyan. Get personalized astrology predictions instantly.",
     type: "website",
+    locale: "en_US",
+    siteName: "HastRekhaAI",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "HastRekhaAI - AI Palm Reading Predictions",
+    description: "AI-powered palm reading and astrology predictions based on Hastrekha Vigyan",
+  },
+  alternates: {
+    canonical: "https://hastrekhaa.com",
   },
 };
 
