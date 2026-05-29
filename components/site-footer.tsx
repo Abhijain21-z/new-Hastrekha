@@ -52,6 +52,7 @@ export function SiteFooter() {
             <h3 className="mb-3 text-sm font-semibold text-foreground">{t("footer.legal")}</h3>
             <ul className="flex flex-col gap-2">
               <li><Link href="/privacy" className="text-sm text-muted-foreground hover:text-primary">{t("footer.privacy")}</Link></li>
+              <li><Link href="/terms" className="text-sm text-muted-foreground hover:text-primary">Terms of Service</Link></li>
               <li><Link href="/disclaimer" className="text-sm text-muted-foreground hover:text-primary">{t("footer.disclaimer")}</Link></li>
             </ul>
           </div>
