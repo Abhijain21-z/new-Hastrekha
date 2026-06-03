@@ -99,11 +99,16 @@ interface OrbitRingProps {
 }
 
 function AdvancedOrbitRing({ distance, color }: OrbitRingProps) {
-  const lineRef = useRef<THREE.Line<THREE.BufferGeometry, THREE.Material>>(null);
+  const groupRef = useRef<THREE.Group>(null);
 
   useMemo(() => {
-    if (!lineRef.current) return;
+    if (!groupRef.current) return;
     
+    // Clear previous children
+    while (groupRef.current.children.length > 0) {
+      groupRef.current.remove(groupRef.current.children[0]);
+    }
+
     const points: THREE.Vector3[] = [];
     for (let i = 0; i <= 128; i++) {
       const angle = (i / 128) * Math.PI * 2;
@@ -116,19 +121,17 @@ function AdvancedOrbitRing({ distance, color }: OrbitRingProps) {
       );
     }
     const geometry = new THREE.BufferGeometry().setFromPoints(points);
-    lineRef.current.geometry = geometry;
-  }, [distance]);
+    const material = new THREE.LineBasicMaterial({
+      color: color,
+      transparent: true,
+      opacity: 0.15,
+      linewidth: 1,
+    });
+    const line = new THREE.Line(geometry, material);
+    groupRef.current.add(line);
+  }, [distance, color]);
 
-  return (
-    <line ref={lineRef}>
-      <lineBasicMaterial
-        color={color}
-        transparent
-        opacity={0.15}
-        linewidth={1}
-      />
-    </line>
-  );
+  return <group ref={groupRef} />;
 }
 
 function Planet({ config }: PlanetProps) {

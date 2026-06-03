@@ -2,7 +2,7 @@
 
 import { useRef, useMemo } from 'react';
 import { Canvas, useFrame } from '@react-three/fiber';
-import { Sphere } from '@react-three/drei';
+import { Sphere, Text, OrbitControls, useTexture } from '@react-three/drei';
 import * as THREE from 'three';
 
 interface SimplePlanetProps {
@@ -16,58 +16,58 @@ interface SimplePlanetProps {
 
 const SIMPLE_PLANETS: SimplePlanetProps[] = [
   {
-    name: 'Sun',
-    size: 0.6,
+    name: 'Surya',
+    size: 0.8,
     distance: 0,
     speed: 0,
     color: '#FDB813',
     emissive: '#FDB813',
   },
   {
-    name: 'Mercury',
-    size: 0.15,
-    distance: 2,
-    speed: 0.04,
+    name: 'Budh',
+    size: 0.2,
+    distance: 2.5,
+    speed: 0.05,
     color: '#8C7853',
     emissive: '#654321',
   },
   {
-    name: 'Venus',
-    size: 0.25,
-    distance: 3.5,
-    speed: 0.02,
+    name: 'Shukra',
+    size: 0.28,
+    distance: 4,
+    speed: 0.025,
     color: '#FFC649',
     emissive: '#FF9500',
   },
   {
-    name: 'Earth',
-    size: 0.25,
-    distance: 5,
-    speed: 0.01,
+    name: 'Prithvi',
+    size: 0.28,
+    distance: 5.8,
+    speed: 0.015,
     color: '#4A90E2',
     emissive: '#2E5C8A',
   },
   {
-    name: 'Mars',
-    size: 0.18,
-    distance: 6.5,
-    speed: 0.008,
+    name: 'Mangal',
+    size: 0.22,
+    distance: 7.5,
+    speed: 0.01,
     color: '#E27B58',
     emissive: '#D64729',
   },
   {
-    name: 'Jupiter',
-    size: 0.4,
-    distance: 8.5,
-    speed: 0.003,
+    name: 'Brihaspati',
+    size: 0.45,
+    distance: 9.5,
+    speed: 0.005,
     color: '#C88B3A',
     emissive: '#A0680F',
   },
   {
-    name: 'Saturn',
-    size: 0.35,
-    distance: 10.5,
-    speed: 0.002,
+    name: 'Shani',
+    size: 0.4,
+    distance: 11.5,
+    speed: 0.003,
     color: '#FAD5A5',
     emissive: '#D4A85A',
   },
@@ -83,11 +83,16 @@ interface OrbitRingProps {
 }
 
 function OrbitRing({ distance, color }: OrbitRingProps) {
-  const lineRef = useRef<THREE.Line<THREE.BufferGeometry, THREE.Material>>(null);
+  const groupRef = useRef<THREE.Group>(null);
 
   useMemo(() => {
-    if (!lineRef.current) return;
+    if (!groupRef.current) return;
     
+    // Clear previous children
+    while (groupRef.current.children.length > 0) {
+      groupRef.current.remove(groupRef.current.children[0]);
+    }
+
     const points: THREE.Vector3[] = [];
     for (let i = 0; i <= 64; i++) {
       const angle = (i / 64) * Math.PI * 2;
@@ -100,19 +105,17 @@ function OrbitRing({ distance, color }: OrbitRingProps) {
       );
     }
     const geometry = new THREE.BufferGeometry().setFromPoints(points);
-    lineRef.current.geometry = geometry;
-  }, [distance]);
+    const material = new THREE.LineBasicMaterial({
+      color: color,
+      transparent: true,
+      opacity: 0.2,
+      linewidth: 0.5,
+    });
+    const line = new THREE.Line(geometry, material);
+    groupRef.current.add(line);
+  }, [distance, color]);
 
-  return (
-    <line ref={lineRef}>
-      <lineBasicMaterial
-        color={color}
-        transparent
-        opacity={0.2}
-        linewidth={0.5}
-      />
-    </line>
-  );
+  return <group ref={groupRef} />;
 }
 
 function SimplePlanet({ config }: PlanetProps) {
@@ -124,39 +127,60 @@ function SimplePlanet({ config }: PlanetProps) {
       groupRef.current.rotation.y += config.speed;
     }
     if (meshRef.current) {
-      meshRef.current.rotation.x += 0.003;
-      meshRef.current.rotation.y += 0.005;
+      meshRef.current.rotation.x += 0.002;
+      meshRef.current.rotation.y += 0.003;
     }
   });
 
-  if (config.distance === 0) {
-    return (
-      <Sphere args={[config.size, 32, 32]}>
-        <meshStandardMaterial
-          color={config.color}
-          emissive={config.emissive}
-          emissiveIntensity={0.8}
-          metalness={0.2}
-          roughness={0.5}
-        />
-      </Sphere>
-    );
-  }
-
   return (
     <group ref={groupRef}>
-      <Sphere args={[config.size, 16, 16]} ref={meshRef} position={[config.distance, 0, 0]}>
-        <meshStandardMaterial
-          color={config.color}
-          emissive={config.emissive}
-          emissiveIntensity={0.4}
-          metalness={0.2}
-          roughness={0.7}
-        />
-      </Sphere>
-
-      {/* Orbital ring */}
       <OrbitRing distance={config.distance} color={config.color} />
+      {config.distance > 0 && (
+        <group position={[config.distance, 0, 0]}>
+          <Sphere
+            ref={meshRef}
+            args={[config.size, 32, 32]}
+            position={[0, 0, 0]}
+          >
+            <meshStandardMaterial
+              color={config.color}
+              emissive={config.emissive}
+              emissiveIntensity={0.4}
+              metalness={0.3}
+              roughness={0.6}
+              wireframe={false}
+            />
+          </Sphere>
+          {/* Glow effect */}
+          <Sphere
+            args={[config.size * 1.15, 32, 32]}
+            position={[0, 0, 0]}
+          >
+            <meshBasicMaterial
+              color={config.emissive}
+              transparent
+              opacity={0.15}
+              wireframe={false}
+            />
+          </Sphere>
+        </group>
+      )}
+      {config.distance === 0 && (
+        <Sphere
+          ref={meshRef}
+          args={[config.size, 64, 64]}
+          position={[0, 0, 0]}
+        >
+          <meshStandardMaterial
+            color={config.color}
+            emissive={config.emissive}
+            emissiveIntensity={0.6}
+            metalness={0.1}
+            roughness={0.3}
+            wireframe={false}
+          />
+        </Sphere>
+      )}
     </group>
   );
 }
@@ -191,47 +215,40 @@ function SimpleStars() {
 export function PlanetaryVisualizer() {
   return (
     <Canvas
-      camera={{
-        position: [0, 12, 18],
-        fov: 50,
-        near: 0.1,
-        far: 500,
-      }}
-      style={{
-        width: '100%',
-        height: '100%',
-      }}
-      gl={{
-        antialias: true,
-        alpha: true,
-        preserveDrawingBuffer: true,
-      }}
+      camera={{ position: [0, 15, 20], fov: 50 }}
+      style={{ width: '100%', height: '100%' }}
+      gl={{ alpha: true, antialias: true, powerPreference: 'high-performance' }}
     >
       {/* Lighting */}
-      <ambientLight intensity={0.6} color="#ffffff" />
-      <pointLight
-        position={[0, 3, 5]}
-        intensity={1.8}
-        color="#ffd89b"
-        castShadow
-      />
-      <pointLight position={[-10, 5, -10]} intensity={0.4} color="#87ceeb" />
-
+      <ambientLight intensity={0.4} />
+      <pointLight position={[0, 5, 10]} intensity={1.2} />
+      <pointLight position={[-10, 5, -10]} intensity={0.4} />
+      
       {/* Background */}
-      <color attach="background" args={['#0a0a0f']} />
-
-      {/* Stars */}
       <SimpleStars />
+      
+      {/* Planets and orbits */}
+      <group rotation={[0.2, 0, 0]}>
+        {SIMPLE_PLANETS.map((planet) => (
+          <SimplePlanet key={planet.name} config={planet} />
+        ))}
+      </group>
 
-      {/* Planets */}
-      {SIMPLE_PLANETS.map((planet) => (
-        <SimplePlanet key={planet.name} config={planet} />
-      ))}
-
-      {/* Central glow */}
-      <Sphere args={[0.35, 16, 16]} position={[0, 0, 0]}>
-        <meshBasicMaterial color="#FFD89B" fog={false} />
+      {/* Central sun glow */}
+      <Sphere args={[1, 32, 32]} position={[0, 0, 0]}>
+        <meshBasicMaterial
+          color="#FDB813"
+          transparent
+          opacity={0.08}
+        />
       </Sphere>
+
+      <OrbitControls 
+        enableZoom={false}
+        enablePan={false}
+        autoRotate={true}
+        autoRotateSpeed={1}
+      />
     </Canvas>
   );
 }
