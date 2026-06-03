@@ -45,11 +45,9 @@ const HASTREKHA_BOOKS: Book[] = [
 export function BookReadingSection() {
   const { t } = useLanguage();
   const [selectedBook, setSelectedBook] = useState<string | null>(null);
-  const [pdfError, setPdfError] = useState(false);
 
   const handleBookSelect = (bookId: string) => {
     setSelectedBook(bookId);
-    setPdfError(false);
   };
 
   const selectedBookData = HASTREKHA_BOOKS.find((b) => b.id === selectedBook);
@@ -153,41 +151,29 @@ export function BookReadingSection() {
                   </div>
                 </div>
 
-                {/* PDF Embedded Viewer */}
-                <div className="rounded-lg border-2 border-border overflow-hidden bg-muted/20">
-                  <div className="w-full bg-muted p-4 text-center text-sm text-muted-foreground">
-                    PDF Preview - Click to expand or download
-                  </div>
-                  <iframe
-                    key={selectedBook}
-                    src={`https://ia601507.us.archive.org/embed/${selectedBookData.id}`}
-                    width="100%"
-                    height="600"
-                    frameBorder="0"
-                    allowFullScreen={true}
-                    className="w-full"
-                    onError={() => setPdfError(true)}
-                  />
-                </div>
-
-                {/* Alternative Viewer */}
+                {/* Book Information Card */}
                 <div className="rounded-lg border-2 border-border bg-card p-6">
-                  <h4 className="font-semibold text-foreground mb-3">
-                    Cannot see the preview above?
-                  </h4>
-                  <p className="text-sm text-muted-foreground mb-4">
-                    Use the buttons above to download or view on Archive.org
-                  </p>
-                  <div className="text-xs text-muted-foreground space-y-2 bg-muted/30 rounded p-3">
-                    <p>
-                      <strong>Pages:</strong> {selectedBookData.pages}
-                    </p>
-                    <p>
-                      <strong>Year:</strong> {selectedBookData.year}
-                    </p>
-                    <p>
-                      <strong>Source:</strong> Internet Archive
-                    </p>
+                  <div className="space-y-4">
+                    <div>
+                      <h4 className="font-semibold text-foreground mb-2">Book Details</h4>
+                      <div className="text-sm text-muted-foreground space-y-2">
+                        <p>
+                          <strong>Pages:</strong> {selectedBookData.pages}
+                        </p>
+                        <p>
+                          <strong>Published:</strong> {selectedBookData.year}
+                        </p>
+                        <p>
+                          <strong>Source:</strong> Internet Archive (Archive.org)
+                        </p>
+                      </div>
+                    </div>
+                    
+                    <div className="pt-4 border-t border-border">
+                      <p className="text-sm text-muted-foreground mb-3">
+                        Use the download button above to access the PDF on your device, or view it on Archive.org for online reading.
+                      </p>
+                    </div>
                   </div>
                 </div>
               </div>
