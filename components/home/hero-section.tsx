@@ -3,9 +3,17 @@
 import Image from "next/image";
 import Link from "next/link";
 import { ArrowRight, Play } from "lucide-react";
+import dynamic from "next/dynamic";
 import { Button } from "@/components/ui/button";
 import { useLanguage } from "@/lib/language-context";
 import { ZodiacWheel, PalmSVG, StarField } from "@/components/zodiac-icons";
+
+const PlanetaryVisualizer = dynamic(
+  () => import("@/components/3d/planetary-visualizer").then(mod => ({
+    default: mod.PlanetaryVisualizer
+  })),
+  { ssr: false, loading: () => <div className="h-96 bg-gradient-to-b from-slate-900 to-slate-950 rounded-lg" /> }
+);
 
 export function HeroSection() {
   const { t } = useLanguage();
@@ -114,43 +122,39 @@ export function HeroSection() {
             </div>
           </div>
 
-          {/* Right: Visual */}
+          {/* Right: 3D Planetary Visualization */}
           <div className="relative flex items-center justify-center">
-            <div className="relative">
-              {/* Glow behind palm */}
+            <div className="relative w-full h-96 lg:h-[500px]">
+              {/* Glow effects */}
               <div className="absolute left-1/2 top-1/2 h-64 w-64 -translate-x-1/2 -translate-y-1/2 rounded-full bg-primary/12 blur-3xl" />
-              <div className="relative h-80 w-64 animate-float lg:h-96 lg:w-80 overflow-hidden rounded-lg border-2 border-slate-800 shadow-xl">
-                <Image
-                  src="/palm-diagram.jpg"
-                  alt="Palm reading diagram showing heart line, head line, life line, and fate line"
-                  fill
-                  sizes="(max-width: 1024px) 256px, 320px"
-                  className="object-contain p-2"
-                  priority
-                />
+              <div className="absolute left-1/2 top-1/2 h-72 w-72 -translate-x-1/2 -translate-y-1/2 rounded-full bg-accent/8 blur-3xl animate-pulse" />
+              
+              {/* 3D Container */}
+              <div className="relative w-full h-full overflow-hidden rounded-lg border-2 border-slate-800/50 shadow-xl bg-gradient-to-b from-slate-900/40 to-slate-950/60 backdrop-blur-sm">
+                <PlanetaryVisualizer />
               </div>
 
-              {/* Floating cards */}
+              {/* Info cards */}
               <div className="absolute -left-8 top-8 animate-float rounded-xl border-2 border-slate-800 bg-card/95 px-4 py-3 shadow-lg backdrop-blur-sm" style={{ animationDelay: "0.5s" }}>
                 <div className="flex items-center gap-2">
-                  <div className="flex h-7 w-7 items-center justify-center rounded-full bg-red-50">
-                    <span className="text-xs text-red-500" role="img" aria-label="Heart line">{"♥"}</span>
+                  <div className="flex h-7 w-7 items-center justify-center rounded-full bg-yellow-50">
+                    <span className="text-xs text-yellow-600" role="img" aria-label="Sun">{"☀"}</span>
                   </div>
                   <div>
-                    <p className="text-xs font-medium text-foreground">Heart Line / <span className="text-primary">{"\u0939\u0943\u0926\u092f \u0930\u0947\u0916\u093e"}</span></p>
-                    <p className="text-[10px] text-muted-foreground">Deep & Clear</p>
+                    <p className="text-xs font-medium text-foreground">Surya / <span className="text-primary">{"\u0938\u0942\u0930\u094d\u092f"}</span></p>
+                    <p className="text-[10px] text-muted-foreground">Life Force</p>
                   </div>
                 </div>
               </div>
 
               <div className="absolute -right-4 bottom-20 animate-float rounded-xl border-2 border-slate-800 bg-card/95 px-4 py-3 shadow-lg backdrop-blur-sm" style={{ animationDelay: "1s" }}>
                 <div className="flex items-center gap-2">
-                  <div className="flex h-7 w-7 items-center justify-center rounded-full bg-amber-50">
-                    <span className="text-xs text-amber-500" role="img" aria-label="Star">{"★"}</span>
+                  <div className="flex h-7 w-7 items-center justify-center rounded-full bg-blue-50">
+                    <span className="text-xs text-blue-600" role="img" aria-label="Moon">{"☾"}</span>
                   </div>
                   <div>
-                    <p className="text-xs font-medium text-foreground">Fate Line / <span className="text-accent">{"\u092d\u093e\u0917\u094d\u092f \u0930\u0947\u0916\u093e"}</span></p>
-                    <p className="text-[10px] text-muted-foreground">Strong Path</p>
+                    <p className="text-xs font-medium text-foreground">Navagraha / <span className="text-accent">{"\u0928\u0935\u0917\u094d\u0930\u0939"}</span></p>
+                    <p className="text-[10px] text-muted-foreground">9 Planets</p>
                   </div>
                 </div>
               </div>

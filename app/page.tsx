@@ -1,5 +1,6 @@
 "use client";
 
+import dynamic from "next/dynamic";
 import { LanguageProvider } from "@/lib/language-context";
 import { SiteHeader } from "@/components/site-header";
 import { SiteFooter } from "@/components/site-footer";
@@ -10,6 +11,13 @@ import { DashboardSection } from "@/components/home/dashboard-section";
 import { InlinePalmForm } from "@/components/home/inline-palm-form";
 import { FeaturesSection } from "@/components/home/features-section";
 import { CTASection } from "@/components/home/cta-section";
+
+const PlanetarySection = dynamic(
+  () => import("@/components/3d/planetary-section").then(mod => ({
+    default: mod.PlanetarySection
+  })),
+  { ssr: false, loading: () => <div className="h-screen bg-slate-950" /> }
+);
 
 export default function HomePage() {
   return (
@@ -70,6 +78,9 @@ export default function HomePage() {
         >
           <CTASection />
         </ScrollytellSection>
+
+        {/* 3D Planetary System Section */}
+        <PlanetarySection />
       </main>
       <SiteFooter />
     </LanguageProvider>
