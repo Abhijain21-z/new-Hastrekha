@@ -21,7 +21,7 @@ export function ProcessingScreen({ onComplete }: ProcessingScreenProps) {
   ];
 
   useEffect(() => {
-    const duration = 60000; // 60 seconds (1 minute)
+    const duration = 20000; // 20 seconds
     const interval = 50;
     const increment = (100 / duration) * interval;
 
