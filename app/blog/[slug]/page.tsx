@@ -10,19 +10,21 @@ import { BlogPostClient } from '@/components/blog/blog-post-client';
 import { ArrowLeft, Calendar, Clock, User } from 'lucide-react';
 
 interface BlogPostPageProps {
-  params: {
+  params: Promise<{
     slug: string;
-  };
+  }>;
 }
 
 export async function generateStaticParams() {
-  return getAllBlogSlugs().map((slug) => ({
-    slug,
+  const slugs = getAllBlogSlugs();
+  return slugs.map((slug) => ({
+    slug: String(slug),
   }));
 }
 
 export async function generateMetadata({ params }: BlogPostPageProps): Promise<Metadata> {
-  const blog = getBlogBySlug(params.slug);
+  const { slug } = await params;
+  const blog = getBlogBySlug(slug);
 
   if (!blog) {
     return {
@@ -46,15 +48,16 @@ export async function generateMetadata({ params }: BlogPostPageProps): Promise<M
   };
 }
 
-export default function BlogPostPage({ params }: BlogPostPageProps) {
-  const blog = getBlogBySlug(params.slug);
+export default async function BlogPostPage({ params }: BlogPostPageProps) {
+  const { slug } = await params;
+  const blog = getBlogBySlug(slug);
 
   if (!blog) {
     notFound();
   }
 
   // Get related blogs (next and previous)
-  const blogIndex = blogsData.findIndex((b) => b.slug === params.slug);
+  const blogIndex = blogsData.findIndex((b) => b.slug === slug);
   const previousBlog = blogIndex > 0 ? blogsData[blogIndex - 1] : null;
   const nextBlog = blogIndex < blogsData.length - 1 ? blogsData[blogIndex + 1] : null;
 
