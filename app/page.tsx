@@ -10,7 +10,6 @@ import { DashboardSection } from "@/components/home/dashboard-section";
 import { InlinePalmForm } from "@/components/home/inline-palm-form";
 import { FeaturesSection } from "@/components/home/features-section";
 import { CTASection } from "@/components/home/cta-section";
-import { BookReadingSection } from "@/components/home/book-reading-section";
 
 export default function HomePage() {
   return (
@@ -70,15 +69,6 @@ export default function HomePage() {
           enableParallax={true}
         >
           <CTASection />
-        </ScrollytellSection>
-
-        {/* Hastrekha Vigyan Book Reading Section */}
-        <ScrollytellSection
-          id="books"
-          enableParallax={true}
-          enableReveal={true}
-        >
-          <BookReadingSection />
         </ScrollytellSection>
       </main>
       <SiteFooter />
