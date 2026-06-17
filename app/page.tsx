@@ -10,6 +10,7 @@ import { DashboardSection } from "@/components/home/dashboard-section";
 import { InlinePalmForm } from "@/components/home/inline-palm-form";
 import { FeaturesSection } from "@/components/home/features-section";
 import { CTASection } from "@/components/home/cta-section";
+import { BlogCarousel } from "@/components/home/blog-carousel";
 
 export default function HomePage() {
   return (
@@ -69,6 +70,15 @@ export default function HomePage() {
           enableParallax={true}
         >
           <CTASection />
+        </ScrollytellSection>
+
+        {/* Blog Carousel Section */}
+        <ScrollytellSection
+          id="blogs"
+          enableParallax={true}
+          enableReveal={true}
+        >
+          <BlogCarousel />
         </ScrollytellSection>
       </main>
       <SiteFooter />
