@@ -121,7 +121,7 @@ export function InlinePalmForm() {
         </p>
       </div>
 
-      <div className="flex flex-col gap-6 rounded-2xl border border-primary/20 bg-card p-6 shadow-lg border-glow md:p-8">
+      <div className="flex flex-col gap-6 rounded-2xl border-2 border-slate-700 bg-card p-6 shadow-lg md:p-8">
         {/* Error Alert */}
         {error && (
           <div className="flex items-start gap-3 rounded-lg border border-destructive/30 bg-destructive/10 p-4">
@@ -142,7 +142,7 @@ export function InlinePalmForm() {
             placeholder={language === 'hi' ? 'अपना पूरा नाम दर्ज करें' : 'Enter your full name'}
             value={name}
             onChange={(e) => setName(e.target.value)}
-            className="border-primary/20 bg-background text-foreground placeholder:text-muted-foreground"
+            className="border-2 border-slate-700 bg-background text-foreground placeholder:text-muted-foreground"
           />
         </div>
 
@@ -235,7 +235,7 @@ export function InlinePalmForm() {
             placeholder={language === 'hi' ? 'शहर का नाम दर्ज करें' : 'Enter city name'}
             value={birthPlace}
             onChange={(e) => setBirthPlace(e.target.value)}
-            className="border-primary/20 bg-background text-foreground placeholder:text-muted-foreground"
+            className="border-2 border-slate-700 bg-background text-foreground placeholder:text-muted-foreground"
           />
         </div>
 

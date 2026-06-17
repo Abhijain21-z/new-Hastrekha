@@ -11,11 +11,13 @@ import { InlinePalmForm } from "@/components/home/inline-palm-form";
 import { FeaturesSection } from "@/components/home/features-section";
 import { CTASection } from "@/components/home/cta-section";
 import { BlogCarousel } from "@/components/home/blog-carousel";
+import { BlogHeadlineCarousel } from "@/components/home/blog-headline-carousel";
 
 export default function HomePage() {
   return (
     <LanguageProvider>
       <SiteHeader />
+      <BlogHeadlineCarousel />
       <main>
         <ScrollytellSection
           id="hero"
