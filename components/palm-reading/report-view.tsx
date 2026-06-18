@@ -64,14 +64,14 @@ export function ReportView({
   // Auto-scroll to top on mount
   React.useEffect(() => {
     if (typeof window !== 'undefined') {
-      window.scrollTo({ top: 0, behavior: 'smooth' });
+      window.scrollTo({ top: 0, behavior: 'auto' });
     }
   }, []);
 
   return (
-    <div className="relative mx-auto max-w-4xl">
+    <div className="relative mx-auto max-w-4xl px-4">
       {/* Header */}
-      <div className="mb-10 text-center">
+      <div className="mb-4 text-center py-2">
         <div className="mb-4 flex flex-wrap items-center justify-center gap-3">
           <div className="inline-flex items-center gap-2 rounded-full border border-primary/20 bg-primary/5 px-4 py-1.5">
             <span className="h-1.5 w-1.5 rounded-full bg-primary" />
@@ -89,7 +89,7 @@ export function ReportView({
             {language === "hi" ? "English" : "हिंदी"}
           </button>
         </div>
-        <h1 className="font-serif text-3xl font-bold text-foreground text-balance md:text-4xl">
+        <h1 className="font-serif text-xl font-bold text-foreground text-balance md:text-2xl">
           {language === "hi" ? "आपकी भाग्य रिपोर्ट" : "Your Destiny Report"}
         </h1>
         {userName && (
@@ -97,7 +97,7 @@ export function ReportView({
             {language === "hi" ? `नाम: ${userName}` : `Name: ${userName}`}
           </p>
         )}
-        <p className="mx-auto mt-3 max-w-2xl text-sm leading-relaxed text-muted-foreground">
+        <p className="mx-auto mt-1 max-w-2xl text-xs leading-relaxed text-muted-foreground">
           {language === "hi"
             ? "आपकी हस्तरेखा और जन्म विवरण के आधार पर यह विस्तृत जीवन विश्लेषण तैयार किया गया है।"
             : "This detailed life analysis has been prepared based on your palm lines and birth details."}
