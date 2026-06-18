@@ -1,24 +1,31 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { useLanguage } from "@/lib/language-context";
 import { ZodiacWheel, PalmSVG } from "@/components/zodiac-icons";
+import { useLanguage } from "@/lib/language-context";
 
 interface ProcessingScreenProps {
   onComplete: () => void;
 }
 
 export function ProcessingScreen({ onComplete }: ProcessingScreenProps) {
-  const { t } = useLanguage();
+  const { language } = useLanguage();
   const [progress, setProgress] = useState(0);
   const [currentStep, setCurrentStep] = useState(0);
 
-  const steps = [
-    t("processing.step1"),
-    t("processing.step2"),
-    t("processing.step3"),
-    t("processing.step4"),
-  ];
+  const steps = language === "hi" 
+    ? [
+        "हथेली का विश्लेषण जारी है...",
+        "जीवन रेखा की जांच की जा रही है...",
+        "भाग्य और नियति की गणना की जा रही है...",
+        "अंतिम विश्लेषण तैयार किया जा रहा है..."
+      ]
+    : [
+        "Analyzing Palm...",
+        "Reading Life Lines...",
+        "Checking Destiny...",
+        "Final Analysis..."
+      ];
 
   useEffect(() => {
     const duration = 30000; // 30 seconds
@@ -50,7 +57,7 @@ export function ProcessingScreen({ onComplete }: ProcessingScreenProps) {
   return (
     <div className="flex min-h-[60vh] flex-col items-center justify-center px-4">
       {/* Animated visuals */}
-      <div className="relative mb-10">
+      <div className="relative mb-8">
         <ZodiacWheel className="h-64 w-64 animate-spin-slow opacity-30" />
         <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2">
           <PalmSVG className="h-32 w-24 animate-pulse-glow" />
@@ -60,21 +67,21 @@ export function ProcessingScreen({ onComplete }: ProcessingScreenProps) {
       </div>
 
       {/* Title */}
-      <h2 className="mb-6 font-serif text-2xl font-bold text-foreground md:text-3xl">
-        {t("processing.title")}
+      <h2 className="mb-4 font-serif text-xl font-bold text-foreground md:text-2xl">
+        {language === "hi" ? "आपकी रिपोर्ट तैयार की जा रही है..." : "Processing Your Report..."}
       </h2>
 
       {/* Steps */}
-      <div className="mb-8 flex flex-col gap-3">
+      <div className="mb-6 w-full max-w-md flex flex-col gap-2">
         {steps.map((step, i) => (
           <div
             key={i}
-            className={`flex items-center gap-3 transition-opacity duration-500 ${
+            className={`flex items-center gap-2 transition-opacity duration-500 ${
               i <= currentStep ? "opacity-100" : "opacity-30"
             }`}
           >
             <div
-              className={`flex h-6 w-6 items-center justify-center rounded-full text-xs font-bold ${
+              className={`flex h-5 w-5 items-center justify-center rounded-full text-xs font-bold shrink-0 ${
                 i < currentStep
                   ? "bg-primary text-primary-foreground"
                   : i === currentStep
@@ -82,12 +89,12 @@ export function ProcessingScreen({ onComplete }: ProcessingScreenProps) {
                     : "bg-muted text-muted-foreground"
               }`}
             >
-              {i < currentStep ? "\u2713" : i + 1}
+              {i < currentStep ? "✓" : i + 1}
             </div>
             <span
-              className={`text-sm ${
+              className={`text-xs md:text-sm ${
                 i === currentStep
-                  ? "font-medium text-foreground"
+                  ? "font-semibold text-foreground"
                   : "text-muted-foreground"
               }`}
             >
@@ -99,13 +106,12 @@ export function ProcessingScreen({ onComplete }: ProcessingScreenProps) {
 
       {/* Progress bar */}
       <div className="w-full max-w-md">
-        <div className="mb-2 flex justify-between text-xs text-muted-foreground">
-          <span>{steps[currentStep]}</span>
-          <span>{Math.round(progress)}%</span>
+        <div className="mb-1 flex justify-between text-xs text-muted-foreground">
+          <span className="text-foreground font-medium">{Math.round(progress)}%</span>
         </div>
-        <div className="h-2 overflow-hidden rounded-full bg-muted">
+        <div className="h-2 overflow-hidden rounded-full bg-muted border border-primary/20">
           <div
-            className="h-full rounded-full bg-primary transition-all duration-200 ease-linear"
+            className="h-full rounded-full bg-gradient-to-r from-primary to-primary/80 transition-all duration-200 ease-linear"
             style={{ width: `${progress}%` }}
           />
         </div>
