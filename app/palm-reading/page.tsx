@@ -43,8 +43,8 @@ function PalmReadingContent() {
         setReport(data.palmAnalysis);
         setLanguage('hi'); // Default to Hindi
         setStage('processing');
-        // Show processing screen for 30 seconds
-        await new Promise((resolve) => setTimeout(resolve, 30000));
+        // Show processing screen for 20 seconds
+        await new Promise((resolve) => setTimeout(resolve, 20000));
         setStage('report');
       }
     } catch (error) {
