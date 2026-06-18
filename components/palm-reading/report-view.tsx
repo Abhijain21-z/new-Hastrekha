@@ -61,6 +61,13 @@ export function ReportView({
     }
   };
 
+  // Auto-scroll to top on mount
+  React.useEffect(() => {
+    if (typeof window !== 'undefined') {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+  }, []);
+
   return (
     <div className="relative mx-auto max-w-4xl">
       {/* Header */}
@@ -109,13 +116,13 @@ export function ReportView({
           <div className="space-y-4">
             <div>
               <h4 className="text-xs font-semibold text-primary mb-2">भविष्यफल (Hindi)</h4>
-              <p className="text-sm leading-relaxed text-muted-foreground">
+              <p className="text-sm leading-relaxed text-foreground font-medium opacity-100">
                 {reportHi.personality}
               </p>
             </div>
             <div className="pt-4 border-t border-primary/10">
               <h4 className="text-xs font-semibold text-primary mb-2">Prediction (English)</h4>
-              <p className="text-sm leading-relaxed text-muted-foreground">
+              <p className="text-sm leading-relaxed text-foreground font-medium opacity-100">
                 {report.personality}
               </p>
             </div>
@@ -223,13 +230,13 @@ export function ReportView({
           <div className="space-y-4">
             <div>
               <h4 className="text-xs font-semibold text-primary mb-2">भविष्यफल (Hindi)</h4>
-              <p className="text-sm leading-relaxed text-muted-foreground">
+              <p className="text-sm leading-relaxed text-foreground font-medium opacity-100">
                 {reportHi.purpose}
               </p>
             </div>
             <div className="pt-4 border-t border-primary/10">
               <h4 className="text-xs font-semibold text-primary mb-2">Prediction (English)</h4>
-              <p className="text-sm leading-relaxed text-muted-foreground">
+              <p className="text-sm leading-relaxed text-foreground font-medium opacity-100">
                 {report.purpose}
               </p>
             </div>
@@ -247,13 +254,13 @@ export function ReportView({
           <div className="space-y-4">
             <div>
               <h4 className="text-xs font-semibold text-primary mb-2">भविष्यफल (Hindi)</h4>
-              <p className="text-sm leading-relaxed text-muted-foreground">
+              <p className="text-sm leading-relaxed text-foreground font-medium opacity-100">
                 {reportHi.career}
               </p>
             </div>
             <div className="pt-4 border-t border-primary/10">
               <h4 className="text-xs font-semibold text-primary mb-2">Prediction (English)</h4>
-              <p className="text-sm leading-relaxed text-muted-foreground">
+              <p className="text-sm leading-relaxed text-foreground font-medium opacity-100">
                 {report.career}
               </p>
             </div>
@@ -271,7 +278,7 @@ export function ReportView({
           <div className="space-y-4">
             <div>
               <h4 className="text-xs font-semibold text-primary mb-2">भविष्यफल (Hindi)</h4>
-              <p className="text-sm leading-relaxed text-muted-foreground">
+              <p className="text-sm leading-relaxed text-foreground font-medium opacity-100">
                 {reportHi.wealth}
               </p>
             </div>
@@ -673,7 +680,7 @@ function ReportCard({
 
   return (
     <div
-      className={`rounded-xl border bg-card p-5 shadow-sm transition-all hover:shadow-md md:p-6 ${borderClass}`}
+      className={`rounded-xl border bg-card p-5 shadow-sm transition-all hover:shadow-md md:p-6 opacity-100 ${borderClass}`}
     >
       <div className="mb-4 flex items-center gap-3">
         <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-primary/10 text-primary">
