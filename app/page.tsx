@@ -3,7 +3,6 @@
 import { LanguageProvider } from "@/lib/language-context";
 import { SiteHeader } from "@/components/site-header";
 import { SiteFooter } from "@/components/site-footer";
-import { ScrollytellSection } from "@/components/scrollytell-section";
 import { HeroSection } from "@/components/home/hero-section";
 import { NameSection } from "@/components/home/name-section";
 import { DashboardSection } from "@/components/home/dashboard-section";
@@ -19,69 +18,35 @@ export default function HomePage() {
       <SiteHeader />
       <BlogHeadlineCarousel />
       <main>
-        <ScrollytellSection
-          id="hero"
-          enableParallax={true}
-          enableCinematic={true}
-          parallaxBackground={true}
-        >
+        <section id="hero">
           <HeroSection />
-        </ScrollytellSection>
+        </section>
 
-        <ScrollytellSection
-          id="name-section"
-          enableReveal={true}
-          enableParallax={true}
-          parallaxBackground={true}
-        >
+        <section id="name-section">
           <NameSection />
-        </ScrollytellSection>
+        </section>
 
-        <ScrollytellSection
-          id="dashboard"
-          enableCinematic={true}
-          parallaxBackground={true}
-        >
+        <section id="dashboard">
           <DashboardSection />
-        </ScrollytellSection>
+        </section>
 
-        {/* Inline Palm Reading Form */}
-        <ScrollytellSection
-          id="palm-form"
-          className="py-16 px-4 lg:px-8 lg:py-24 bg-gradient-to-b from-card/50 to-background"
-          enableParallax={true}
-          enableCinematic={true}
-        >
+        <section id="palm-form" className="py-16 px-4 lg:px-8 lg:py-24 bg-gradient-to-b from-card/50 to-background">
           <div className="container mx-auto">
             <InlinePalmForm />
           </div>
-        </ScrollytellSection>
+        </section>
 
-        <ScrollytellSection
-          id="features"
-          enableParallax={true}
-          enableCinematic={true}
-          parallaxBackground={true}
-        >
+        <section id="features">
           <FeaturesSection />
-        </ScrollytellSection>
+        </section>
 
-        <ScrollytellSection
-          id="cta"
-          enableCinematic={true}
-          enableParallax={true}
-        >
+        <section id="cta">
           <CTASection />
-        </ScrollytellSection>
+        </section>
 
-        {/* Blog Carousel Section */}
-        <ScrollytellSection
-          id="blogs"
-          enableParallax={true}
-          enableReveal={true}
-        >
+        <section id="blogs">
           <BlogCarousel />
-        </ScrollytellSection>
+        </section>
       </main>
       <SiteFooter />
     </LanguageProvider>
