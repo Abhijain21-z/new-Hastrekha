@@ -17,6 +17,14 @@ function PalmReadingContent() {
   const [userName, setUserName] = useState('');
   const [isAnalyzing, setIsAnalyzing] = useState(false);
 
+  const scrollToTop = () => {
+    if (typeof window !== 'undefined') {
+      setTimeout(() => {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      }, 100);
+    }
+  };
+
   const handleFormSubmit = async (data: {
     name: string;
     image: string;
@@ -35,8 +43,8 @@ function PalmReadingContent() {
         setReport(data.palmAnalysis);
         setLanguage('hi'); // Default to Hindi
         setStage('processing');
-        // Show processing screen for 60 seconds (1 minute)
-        await new Promise((resolve) => setTimeout(resolve, 60000));
+        // Show processing screen for 20 seconds
+        await new Promise((resolve) => setTimeout(resolve, 20000));
         setStage('report');
       }
     } catch (error) {
@@ -62,15 +70,20 @@ function PalmReadingContent() {
           <PalmForm onSubmit={handleFormSubmit} isAnalyzing={isAnalyzing} />
         )}
         {stage === 'processing' && (
-          <ProcessingScreen onComplete={() => setStage('report')} />
+          <ProcessingScreen onComplete={() => {
+            setStage('report');
+            scrollToTop();
+          }} />
         )}
         {stage === 'report' && report && (
-          <ReportView
-            report={report}
-            reportHi={report}
-            userName={userName}
-            onNewReading={handleNewReading}
-          />
+          <div className="w-full">
+            <ReportView
+              report={report}
+              reportHi={report}
+              userName={userName}
+              onNewReading={handleNewReading}
+            />
+          </div>
         )}
       </main>
       <SiteFooter />

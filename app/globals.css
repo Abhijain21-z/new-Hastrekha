@@ -157,3 +157,9 @@
 .border-glow {
   box-shadow: 0 0 0 1px hsl(36 90% 50% / 0.15), 0 2px 12px hsl(36 90% 50% / 0.08);
 }
+
+/* Smooth scroll behavior */
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 80px;
+}
