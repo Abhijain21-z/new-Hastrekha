@@ -80,21 +80,24 @@ export default function RootLayout({
         <link rel="alternate" hrefLang="en" href="https://hastrekhaa.com/en" />
         <link rel="alternate" hrefLang="hi" href="https://hastrekhaa.com/hi" />
         <link rel="alternate" hrefLang="x-default" href="https://hastrekhaa.com" />
-        <script type="application/ld+json">
-          {JSON.stringify({
-            "@context": "https://schema.org",
-            "@type": "LocalBusiness",
-            "name": "HastRekhaAI",
-            "description": "AI-powered palm reading and astrology predictions based on Hastrekha Vigyan",
-            "url": "https://hastrekhaa.com",
-            "serviceType": "Astrology & Palmistry",
-            "areaServed": "Worldwide",
-            "contactPoint": {
-              "@type": "ContactPoint",
-              "contactType": "Customer Service"
-            }
-          })}
-        </script>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "LocalBusiness",
+              "name": "HastRekhaAI",
+              "description": "AI-powered palm reading and astrology predictions based on Hastrekha Vigyan",
+              "url": "https://hastrekhaa.com",
+              "serviceType": "Astrology & Palmistry",
+              "areaServed": "Worldwide",
+              "contactPoint": {
+                "@type": "ContactPoint",
+                "contactType": "Customer Service"
+              }
+            })
+          }}
+        />
         <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1067207431102415" crossOrigin="anonymous"></script>
       </head>
       <body
