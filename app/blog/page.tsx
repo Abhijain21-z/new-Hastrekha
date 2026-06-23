@@ -1,29 +1,29 @@
-import { Metadata } from 'next';
+"use client";
+
 import Link from 'next/link';
 import Image from 'next/image';
 import { SiteHeader } from '@/components/site-header';
 import { SiteFooter } from '@/components/site-footer';
-import { Button } from '@/components/ui/button';
 import { blogsData } from '@/lib/blogs-data';
-import { LanguageProvider } from '@/lib/language-context';
+import { LanguageProvider, useLanguage } from '@/lib/language-context';
 
-export const metadata: Metadata = {
-  title: 'Palmistry Blogs | Hastrekha',
-  description: 'Discover the secrets of palmistry through our expert blogs. Learn about lifeline, heart line, marriage line, wealth signs, and more.',
-  keywords: ['palmistry', 'hastrekha', 'blogs', 'lifeline', 'destiny', 'fortune'],
-};
+function BlogPageContent() {
+  const { language } = useLanguage();
 
-export default function BlogPage() {
   return (
-    <LanguageProvider>
+    <>
       <SiteHeader />
       <main className="min-h-screen bg-background">
         {/* Page Header */}
         <div className="border-b border-border bg-gradient-to-b from-primary/10 to-transparent py-12">
           <div className="mx-auto max-w-6xl px-4 text-center">
-            <h1 className="text-4xl font-bold text-foreground">Palmistry Blogs</h1>
+            <h1 className="text-4xl font-bold text-foreground">
+              {language === 'hi' ? 'हस्तरेखा ब्लॉग' : 'Palmistry Blogs'}
+            </h1>
             <p className="mt-4 text-lg text-muted-foreground">
-              Discover the ancient secrets of hand reading and unlock your destiny
+              {language === 'hi'
+                ? 'हाथ पढ़ने के प्राचीन रहस्यों की खोज करें और अपनी नियति को अनलॉक करें'
+                : 'Discover the ancient secrets of hand reading and unlock your destiny'}
             </p>
           </div>
         </div>
@@ -40,7 +40,7 @@ export default function BlogPage() {
                 <div className="relative h-48 w-full overflow-hidden bg-muted">
                   <Image
                     src={blog.imageUrl}
-                    alt={blog.imageAlt.en}
+                    alt={language === 'hi' ? blog.imageAlt.hi : blog.imageAlt.en}
                     fill
                     className="object-cover transition-transform group-hover:scale-105"
                     sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
@@ -51,21 +51,21 @@ export default function BlogPage() {
                 <div className="flex flex-col p-4">
                   <div className="mb-2 flex items-center gap-2">
                     <span className="rounded-full bg-primary/20 px-2 py-1 text-xs font-semibold text-primary">
-                      {blog.category.en}
+                      {language === 'hi' ? blog.category.hi : blog.category.en}
                     </span>
                     <span className="text-xs text-muted-foreground">{blog.readTime} min</span>
                   </div>
 
                   <h3 className="mb-2 line-clamp-2 text-lg font-bold text-foreground group-hover:text-primary">
-                    {blog.title.en}
+                    {language === 'hi' ? blog.title.hi : blog.title.en}
                   </h3>
 
                   <p className="mb-4 flex-grow line-clamp-2 text-sm text-muted-foreground">
-                    {blog.excerpt.en}
+                    {language === 'hi' ? blog.excerpt.hi : blog.excerpt.en}
                   </p>
 
                   <div className="text-xs text-muted-foreground">
-                    {new Date(blog.publishDate).toLocaleDateString('en-US', {
+                    {new Date(blog.publishDate).toLocaleDateString(language === 'hi' ? 'hi-IN' : 'en-US', {
                       year: 'numeric',
                       month: 'short',
                       day: 'numeric',
@@ -78,6 +78,14 @@ export default function BlogPage() {
         </div>
       </main>
       <SiteFooter />
+    </>
+  );
+}
+
+export default function BlogPage() {
+  return (
+    <LanguageProvider>
+      <BlogPageContent />
     </LanguageProvider>
   );
 }
