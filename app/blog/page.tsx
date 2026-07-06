@@ -4,7 +4,6 @@ import Link from 'next/link';
 import { PageShell } from '@/components/page-shell';
 import { StarField } from '@/components/zodiac-icons';
 import { Calendar, ArrowRight, Clock } from 'lucide-react';
-import { useLanguage } from '@/lib/language-context';
 
 const blogPosts = [
   {
@@ -62,7 +61,7 @@ Get your free Vedic astrology analysis at HastRekhaAi and discover your cosmic b
 
 आपकी जन्म पत्रिका (कुंडली) वैदिक ज्योतिष की नींव है। यह आपके जन्म के सटीक समय में सभी ग्रहों की स्थिति को मैप करती है। 12 घर जीवन के विभिन्न क्षेत्रों का प्रतिनिधित्व करते हैं।
 
-आपकी सूर्य राशि (राशि) आपके मूल स्वभाव को समझने में मदद करती है। आपकी चंद्र राशि आपकी भावनात्मक प्रकृति को प्रकट करती है।
+आपकी सूर्य राशि (राशि) आपके मूल स्वभाव को समझने में मदद कर���ी है। आपकी चंद्र राशि आपकी भावनात्मक प्रकृति को प्रकट करती है।
 
 ग्रहीय अवधियां (दशाएं) जीवन की प्रमुख घटनाओं की भविष्यवाणी करती हैं। शनि की ढैया (साढ़े साती) परिवर्तन की विशेष अवधि है।
 
@@ -130,7 +129,7 @@ At HastRekhaAi, we provide comprehensive marriage compatibility analysis conside
   {
     slug: 'lucky-numbers-colors',
     titleEn: 'How to Find Your Lucky Numbers and Colors Through Astrology',
-    titleHi: 'ज्योतिष के माध्यम से अपने भाग्यशाली संख्याएं और रंग कैसे खोजें',
+    titleHi: 'ज्योतिष के माध्यम से अपने भाग्यशाली संख्याएं और रंग कैसे खोजे��',
     excerptEn:
       'Your birth chart holds the key to your luckiest elements. Discover how to identify your fortunate numbers, colors, and days for better life decisions.',
     excerptHi:
@@ -198,8 +197,6 @@ const categoryColors: Record<string, string> = {
 };
 
 export default function BlogPage() {
-  const { language } = useLanguage();
-
   return (
     <PageShell>
       {/* Hero */}
@@ -207,21 +204,17 @@ export default function BlogPage() {
         <StarField className="absolute inset-0" />
         <div className="relative mx-auto max-w-4xl px-4 text-center lg:px-8">
           <h1 className="font-serif text-4xl font-bold text-foreground md:text-5xl text-balance">
-            {language === 'hi' ? 'ज्योतिष और हस्तरेखा विज्ञान ब्लॉग' : 'Astrology & Palmistry Blog'}
+            Astrology & Palmistry Blog
             <br />
             <span className="text-primary">
-              {language === 'hi' ? 'Astrology & Palmistry Blog' : 'ज्योतिष और हस्तरेखा विज्ञान ब्लॉग'}
+              ज्योतिष और हस्तरेखा विज्ञान ब्लॉग
             </span>
           </h1>
           <p className="mt-4 text-lg leading-relaxed text-muted-foreground">
-            {language === 'hi'
-              ? 'हस्तरेखा विज्ञान, वैदिक ज्योतिष और आध्यात्मिक मार्गदर्शन पर लेख पढ़ें। अपने आप को बेहतर जानिए।'
-              : 'Explore articles on palmistry, Vedic astrology, and spiritual guidance. Deepen your understanding of the ancient sciences.'}
+            Explore articles on palmistry, Vedic astrology, and spiritual guidance. Deepen your understanding of the ancient sciences.
             <br />
             <span className="text-base">
-              {language === 'hi'
-                ? 'Explore articles on palmistry, Vedic astrology, and spiritual guidance.'
-                : 'हस्तरेखा विज्ञान, वैदिक ज्योतिष और आध्यात्मिक मार्गदर्शन पर लेख पढ़ें।'}
+              हस्तरेखा विज्ञान, वैदिक ज्योतिष और आध्यात्मिक मार्गदर्शन पर लेख पढ़ें।
             </span>
           </p>
         </div>
@@ -256,17 +249,17 @@ export default function BlogPage() {
                   {/* Title - Bilingual */}
                   <div className="mb-2">
                     <h2 className="mb-1 font-serif text-base font-semibold text-foreground transition-colors group-hover:text-primary">
-                      {language === 'hi' ? post.titleHi : post.titleEn}
+                      {post.titleEn}
                     </h2>
                     <p className="text-sm font-medium text-primary/80 italic">
-                      {language === 'hi' ? post.titleEn : post.titleHi}
+                      {post.titleHi}
                     </p>
                   </div>
 
                   {/* Excerpt - Bilingual */}
                   <div className="mb-4 flex-1">
                     <p className="text-xs leading-relaxed text-muted-foreground">
-                      {language === 'hi' ? post.excerptHi : post.excerptEn}
+                      {post.excerptEn}
                     </p>
                   </div>
 
@@ -280,7 +273,7 @@ export default function BlogPage() {
                       href={`/blog/${post.slug}`}
                       className="flex items-center gap-1 text-xs font-medium text-primary hover:underline"
                     >
-                      {language === 'hi' ? 'पढ़ें' : 'Read'} <ArrowRight className="h-3 w-3" />
+                      Read <ArrowRight className="h-3 w-3" />
                     </Link>
                   </div>
                 </div>
@@ -294,39 +287,16 @@ export default function BlogPage() {
       <section className="py-16 lg:py-20">
         <div className="mx-auto max-w-2xl px-4 text-center lg:px-8">
           <h2 className="mb-4 font-serif text-2xl font-bold text-foreground">
-            {language === 'hi' ? 'आज ही अपनी AI-संचालित हस्तरेखा पढ़ना शुरू करें' : 'Get Your AI-Powered Palm Reading Today'}
+            Get Your AI-Powered Palm Reading Today
             <br />
-            <span className="text-lg text-primary">
-              {language === 'hi'
-                ? 'Get Your AI-Powered Palm Reading Today'
-                : 'आज ही अपनी AI-संचालित हस्तरेखा पढ़ना शुरू करें'}
-            </span>
+            <span className="text-primary">आज ही अपनी AI-संचालित हस्तरेखा पढ़ना शुरू करें</span>
           </h2>
-          <p className="mb-6 leading-relaxed text-muted-foreground">
-            {language === 'hi'
-              ? 'जेमिनी AI और प्राचीन हस्तरेखा ज्ञान से शक्तिशाली प्रामाणिक हस्तरेखा पढ़ना का अनुभव लें। अपनी हथेली की तस्वीर अपलोड करें और हिंदी और अंग्रेजी में विस्तृत भविष्यवाणियां प्राप्त करें।'
-              : 'Experience authentic palm reading powered by Gemini AI and ancient palmistry knowledge. Upload your palm image and get detailed predictions in Hindi and English.'}
-            <br />
-            <span className="text-sm">
-              {language === 'hi'
-                ? 'Experience authentic palm reading powered by Gemini AI and ancient palmistry knowledge.'
-                : 'जेमिनी AI और प्राचीन हस्तरेखा ज्ञान से शक्तिशाली प्रामाणिक हस्तरेखा पढ़ना।'}
-            </span>
+          <p className="mb-6 text-lg leading-relaxed text-muted-foreground">
+            Unlock the secrets of your destiny with our advanced AI-powered palm reading service. हमारे AI-संचालित हस्तरेखा सेवा का लाभ उठाएं।
           </p>
-          <div className="flex flex-col gap-4 sm:flex-row sm:justify-center">
-            <Link
-              href="/palm-reading"
-              className="inline-flex items-center justify-center rounded-lg bg-primary px-6 py-3 font-medium text-primary-foreground transition-colors hover:bg-primary/90"
-            >
-              {language === 'hi' ? 'हस्तरेखा पढ़ना शुरू करें' : 'Start Palm Reading'}
-            </Link>
-            <Link
-              href="/"
-              className="inline-flex items-center justify-center rounded-lg border border-primary/30 bg-primary/5 px-6 py-3 font-medium text-primary transition-colors hover:bg-primary/10"
-            >
-              {language === 'hi' ? 'होम पर वापस जाएं' : 'Back to Home'}
-            </Link>
-          </div>
+          <a href="https://hastrrekhaai.com" className="inline-block rounded-lg bg-primary px-8 py-3 font-semibold text-foreground transition-all hover:bg-primary/80">
+            Get Started Now / अभी शुरू करें
+          </a>
         </div>
       </section>
     </PageShell>
