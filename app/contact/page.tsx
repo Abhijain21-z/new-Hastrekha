@@ -38,7 +38,6 @@ export default function ContactPage() {
   function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
     setSubmitted(true);
-    setTimeout(() => setSubmitted(false), 3000);
   }
 
   return (
@@ -49,13 +48,11 @@ export default function ContactPage() {
         <div className="absolute -right-40 top-20 h-80 w-80 rounded-full bg-primary/5 blur-3xl" />
         <div className="relative mx-auto max-w-4xl px-4 text-center lg:px-8">
           <h1 className="font-serif text-4xl font-bold text-foreground md:text-5xl text-balance">
-            Contact HastRekhaAI
+            Contact Us
           </h1>
           <p className="mt-4 text-lg leading-relaxed text-muted-foreground">
-            Have questions about your reading, feedback, or need support? We are here to help you on your spiritual journey. Reach out to us anytime!
-          </p>
-          <p className="mt-2 text-sm text-muted-foreground">
-            We respond to all inquiries within 24 hours
+            Have questions about your reading or our services? We are here to help
+            you on your spiritual journey.
           </p>
         </div>
       </section>
@@ -63,16 +60,13 @@ export default function ContactPage() {
       {/* Contact Info + Form */}
       <section className="py-16 lg:py-20">
         <div className="mx-auto max-w-5xl px-4 lg:px-8">
-          <h2 className="mb-8 font-serif text-2xl font-bold text-foreground md:text-3xl">
-            Get In Touch
-          </h2>
           <div className="grid gap-10 lg:grid-cols-5">
             {/* Info Cards */}
             <div className="flex flex-col gap-4 lg:col-span-2">
               {contactInfo.map((item) => {
                 const Icon = item.icon;
                 return (
-                  <article
+                  <div
                     key={item.title}
                     className="rounded-xl border border-border/50 bg-card p-5 transition-all hover:border-primary/30"
                   >
@@ -86,7 +80,7 @@ export default function ContactPage() {
                       </div>
                     </div>
                     <p className="text-sm text-muted-foreground">{item.description}</p>
-                  </article>
+                  </div>
                 );
               })}
             </div>

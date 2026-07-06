@@ -13,7 +13,6 @@ export function SiteHeader() {
   const navItems = [
     { href: "/", label: t("nav.home") },
     { href: "/about", label: t("nav.about") },
-    { href: "/zodiac", label: "Rashi / राशि" },
     { href: "/astrology-guide", label: t("nav.astrology") },
     { href: "/how-it-works", label: t("nav.howItWorks") },
     { href: "/blog", label: t("nav.blog") },

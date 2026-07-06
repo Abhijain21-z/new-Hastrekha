@@ -1,7 +1,3 @@
-"use client";
-
-import { useMemo } from "react";
-
 export function ZodiacWheel({ className }: { className?: string }) {
   const signs = [
     "\u2648", "\u2649", "\u264A", "\u264B", "\u264C", "\u264D",
@@ -15,8 +11,8 @@ export function ZodiacWheel({ className }: { className?: string }) {
       <circle cx="100" cy="100" r="50" fill="none" stroke="hsl(38 85% 48% / 0.12)" strokeWidth="0.5" />
       {signs.map((sign, i) => {
         const angle = (i * 30 - 90) * (Math.PI / 180);
-        const x = Number((100 + 80 * Math.cos(angle)).toFixed(3));
-        const y = Number((100 + 80 * Math.sin(angle)).toFixed(3));
+        const x = 100 + 80 * Math.cos(angle);
+        const y = 100 + 80 * Math.sin(angle);
         return (
           <text
             key={i}
@@ -33,10 +29,10 @@ export function ZodiacWheel({ className }: { className?: string }) {
       })}
       {Array.from({ length: 12 }).map((_, i) => {
         const angle = (i * 30) * (Math.PI / 180);
-        const x1 = Number((100 + 60 * Math.cos(angle)).toFixed(3));
-        const y1 = Number((100 + 60 * Math.sin(angle)).toFixed(3));
-        const x2 = Number((100 + 68 * Math.cos(angle)).toFixed(3));
-        const y2 = Number((100 + 68 * Math.sin(angle)).toFixed(3));
+        const x1 = 100 + 60 * Math.cos(angle);
+        const y1 = 100 + 60 * Math.sin(angle);
+        const x2 = 100 + 68 * Math.cos(angle);
+        const y2 = 100 + 68 * Math.sin(angle);
         return (
           <line
             key={`line-${i}`}
@@ -256,21 +252,19 @@ function seededRandom(seed: number) {
   return x - Math.floor(x);
 }
 
-export function StarField({ className }: { className?: string }) {
-  const starData = useMemo(() => {
-    return Array.from({ length: 40 }).map((_, i) => ({
-      size: Math.round((seededRandom(i * 7 + 1) * 3 + 1) * 100) / 100,
-      top: Math.round(seededRandom(i * 13 + 3) * 100 * 100) / 100,
-      left: Math.round(seededRandom(i * 17 + 5) * 100 * 100) / 100,
-      opacity: Math.round((seededRandom(i * 23 + 7) * 0.3 + 0.1) * 1000) / 1000,
-      duration: Math.round((seededRandom(i * 29 + 11) * 3 + 2) * 1000) / 1000,
-      delay: Math.round(seededRandom(i * 31 + 13) * 2 * 1000) / 1000,
-    }));
-  }, []);
+const STAR_DATA = Array.from({ length: 40 }).map((_, i) => ({
+  size: seededRandom(i * 7 + 1) * 3 + 1,
+  top: seededRandom(i * 13 + 3) * 100,
+  left: seededRandom(i * 17 + 5) * 100,
+  opacity: seededRandom(i * 23 + 7) * 0.3 + 0.1,
+  duration: seededRandom(i * 29 + 11) * 3 + 2,
+  delay: seededRandom(i * 31 + 13) * 2,
+}));
 
+export function StarField({ className }: { className?: string }) {
   return (
-    <div className={className} aria-hidden="true" suppressHydrationWarning>
-      {starData.map((star, i) => (
+    <div className={className} aria-hidden="true">
+      {STAR_DATA.map((star, i) => (
         <div
           key={i}
           className="absolute rounded-full"
@@ -280,7 +274,7 @@ export function StarField({ className }: { className?: string }) {
             top: `${star.top}%`,
             left: `${star.left}%`,
             opacity: star.opacity,
-            backgroundColor: "hsl(38 85% 48%)",
+            backgroundColor: `hsl(38 85% 48%)`,
             animation: `pulse-glow ${star.duration}s ease-in-out infinite`,
             animationDelay: `${star.delay}s`,
           }}
@@ -289,5 +283,3 @@ export function StarField({ className }: { className?: string }) {
     </div>
   );
 }
-
-

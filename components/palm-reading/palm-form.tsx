@@ -57,38 +57,6 @@ export function PalmForm({ onSubmit, isAnalyzing = false }: PalmFormProps) {
     }
   }, []);
 
-  const handleGeneratePrediction = async () => {
-    if (!name.trim() || !dob || !birthTime || !birthPlace) {
-      setError('Please fill all required fields');
-      return;
-    }
-
-    try {
-      setError('');
-      // Use local prediction engine directly - no palm image needed
-      const { generatePrediction } = await import('@/lib/prediction-engine');
-      const prediction = generatePrediction(
-        { dob, birthTime, birthPlace },
-        'hi'
-      );
-      
-      // Use prediction directly - it already has the right structure
-      const palmAnalysis = prediction;
-
-      onSubmit({
-        name,
-        image: image || '/placeholder.svg',
-        dob,
-        birthTime,
-        birthPlace,
-        palmAnalysis,
-      });
-    } catch (err) {
-      setError(err instanceof Error ? err.message : 'Failed to generate prediction. Please try again.');
-      console.error('[v0] Prediction generation error:', err);
-    }
-  };
-
   const handleSubmit = async () => {
     if (!name.trim() || !image || !dob || !birthTime || !birthPlace) {
       setError('Please fill all fields and upload a palm image');
@@ -97,7 +65,7 @@ export function PalmForm({ onSubmit, isAnalyzing = false }: PalmFormProps) {
 
     try {
       setError('');
-      // Try to call Gemini API to analyze palm
+      // Call Gemini API to analyze palm
       const response = await fetch('/api/analyze-palm', {
         method: 'POST',
         headers: {
@@ -112,42 +80,12 @@ export function PalmForm({ onSubmit, isAnalyzing = false }: PalmFormProps) {
         }),
       });
 
-      let palmAnalysis;
-      
-      if (response.ok) {
-        palmAnalysis = await response.json();
-      } else {
-        // If API fails, use local prediction engine as fallback
-        console.log('[v0] API unavailable, using local prediction engine');
-        const { generatePrediction } = await import('@/lib/prediction-engine');
-        const prediction = generatePrediction(
-          { dob, birthTime, birthPlace },
-          'hi'
-        );
-        
-        // Convert prediction to match API response format
-        palmAnalysis = {
-          personality: { en: prediction.personality, hi: prediction.personality },
-          qualities: { en: prediction.qualities.strengths, hi: prediction.qualities.strengths },
-          weaknesses: { en: prediction.qualities.weaknesses, hi: prediction.qualities.weaknesses },
-          lifePurpose: { en: prediction.purpose, hi: prediction.purpose },
-          careerProfession: { en: prediction.career, hi: prediction.career },
-          wealth: { en: prediction.wealth, hi: prediction.wealth },
-          marriage: { en: prediction.marriage, hi: prediction.marriage },
-          partner: { en: prediction.partnerNature, hi: prediction.partnerNature },
-          education: { en: prediction.education, hi: prediction.education },
-          challengingPhases: { en: prediction.challengeAges, hi: prediction.challengeAges },
-          property: { en: prediction.property, hi: prediction.property },
-          health: { en: prediction.health, hi: prediction.health },
-          spiritual: { en: prediction.spiritual, hi: prediction.spiritual },
-          luckyElements: {
-            lucky_number: { en: prediction.lucky.numbers, hi: prediction.lucky.numbers },
-            lucky_color: { en: prediction.lucky.color, hi: prediction.lucky.color },
-            lucky_day: { en: prediction.lucky.day, hi: prediction.lucky.day },
-          },
-          remedies: { en: prediction.remedies, hi: prediction.remedies },
-        };
+      if (!response.ok) {
+        const data = await response.json();
+        throw new Error(data.details || 'Failed to analyze palm');
       }
+
+      const palmAnalysis = await response.json();
 
       onSubmit({
         name,
@@ -225,9 +163,8 @@ export function PalmForm({ onSubmit, isAnalyzing = false }: PalmFormProps) {
           {image ? (
             <div className="relative mx-auto w-fit">
               <img
-                src={image}
+                src={image || '/placeholder.svg'}
                 alt="Uploaded palm"
-                crossOrigin="anonymous"
                 className="h-48 w-48 rounded-xl border border-primary/20 object-cover shadow-md"
               />
               <button
@@ -337,35 +274,21 @@ export function PalmForm({ onSubmit, isAnalyzing = false }: PalmFormProps) {
           />
         </div>
 
-        {/* Submit Buttons */}
-        <div className="flex flex-col gap-3">
-          <Button
-            onClick={handleGeneratePrediction}
-            disabled={!name.trim() || !dob || !birthTime || !birthPlace || isAnalyzing}
-            size="lg"
-            className="w-full bg-primary text-primary-foreground hover:bg-primary/90 disabled:opacity-50"
-          >
-            <Sparkles className="mr-2 h-4 w-4" />
-            {isAnalyzing ? 'Generating Prediction...' : 'Generate My Prediction'}
-          </Button>
-
-          {image && (
-            <Button
-              onClick={handleSubmit}
-              disabled={!isValid || isAnalyzing}
-              size="lg"
-              className="w-full bg-secondary text-secondary-foreground hover:bg-secondary/90 disabled:opacity-50"
-            >
-              <Camera className="mr-2 h-4 w-4" />
-              {isAnalyzing ? 'Analyzing with AI...' : 'Analyze Palm Image'}
-            </Button>
-          )}
-        </div>
+        {/* Submit */}
+        <Button
+          onClick={handleSubmit}
+          disabled={!isValid || isAnalyzing}
+          size="lg"
+          className="w-full bg-primary text-primary-foreground hover:bg-primary/90 disabled:opacity-50"
+        >
+          <Sparkles className="mr-2 h-4 w-4" />
+          {isAnalyzing ? 'Analyzing with AI...' : t('palm.generate')}
+        </Button>
 
         <p className="text-xs text-muted-foreground text-center">
-          अपनी राशि के अनुसार विस्तृत भविष्यवाणी पाएं
+          Your palm image is analyzed securely using Google Gemini AI. No data is stored.
           <br />
-          Get detailed predictions based on your zodiac sign
+          आपकी हस्तरेखा की छवि सुरक्षित रूप से विश्लेषण की जाती है।
         </p>
       </div>
     </div>

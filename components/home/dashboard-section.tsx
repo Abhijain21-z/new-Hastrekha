@@ -108,21 +108,21 @@ export function DashboardSection() {
 
         <div className="mt-14 grid items-start gap-8 lg:grid-cols-3">
           {/* Left: Palm visualization */}
-          <div className="flex flex-col items-center justify-center rounded-2xl border-2 border-slate-800 bg-card p-6 shadow-lg lg:col-span-1">
-            <div className="w-full max-w-[280px]">
-              <div className="relative aspect-square w-full overflow-hidden rounded-xl border-2 border-slate-800 shadow-md bg-white flex items-center justify-center">
+          <div className="flex flex-col items-center justify-center rounded-2xl border border-primary/20 bg-card p-6 shadow-lg border-glow lg:col-span-1">
+            <div className="relative w-full max-w-[240px]">
+              <div className="relative aspect-[3/4] w-full overflow-hidden rounded-xl shadow-md">
                 <Image
-                  src="/palm.jpg"
+                  src="/images/palm-hand.jpg"
                   alt="Open palm showing major palm lines for reading"
-                  width={280}
-                  height={280}
-                  sizes="(max-width: 768px) 100vw, 280px"
-                  className="w-full h-full object-contain"
-                  priority
+                  fill
+                  className="object-cover"
                 />
+                <div className="absolute inset-0 flex items-center justify-center opacity-50">
+                  <PalmSVG className="h-full w-full" />
+                </div>
               </div>
               {/* Legend */}
-              <div className="mt-4 grid grid-cols-2 gap-2 px-2">
+              <div className="mt-4 grid grid-cols-2 gap-2">
                 <div className="flex items-center gap-1.5">
                   <span className="inline-block h-2.5 w-2.5 rounded-full bg-red-400" />
                   <span className="text-[11px] text-foreground">Heart / {"\u0939\u0943\u0926\u092f"}</span>
@@ -141,7 +141,7 @@ export function DashboardSection() {
                 </div>
               </div>
             </div>
-            <div className="mt-6 text-center">
+            <div className="mt-4 text-center">
               <p className="text-sm font-semibold text-foreground">Palm Analysis Preview</p>
               <p className="text-xs text-muted-foreground italic">
                 {"\u0939\u0938\u094d\u0924\u0930\u0947\u0916\u093e \u0935\u093f\u0936\u094d\u0932\u0947\u0937\u0923 \u092a\u0942\u0930\u094d\u0935\u093e\u0935\u0932\u094b\u0915\u0928"}
@@ -150,7 +150,7 @@ export function DashboardSection() {
           </div>
 
           {/* Center: Line analysis */}
-          <div className="rounded-2xl border-2 border-slate-800 bg-card p-6 shadow-lg lg:col-span-1">
+          <div className="rounded-2xl border border-primary/20 bg-card p-6 shadow-lg border-glow lg:col-span-1">
             <h3 className="font-serif text-lg font-bold text-foreground">
               Palm Line Analysis
             </h3>
@@ -189,7 +189,7 @@ export function DashboardSection() {
               })}
             </div>
 
-            <div className="mt-6 rounded-xl border border-slate-300 bg-primary/5 p-4">
+            <div className="mt-6 rounded-xl border border-primary/10 bg-primary/5 p-4">
               <p className="text-xs leading-relaxed text-muted-foreground">
                 Each line reveals specific aspects of your personality, emotions, intellect, and destiny.
                 A deeper line means stronger influence.
@@ -201,7 +201,7 @@ export function DashboardSection() {
           </div>
 
           {/* Right: Life predictions */}
-          <div className="rounded-2xl border-2 border-slate-800 bg-card p-6 shadow-lg lg:col-span-1">
+          <div className="rounded-2xl border border-primary/20 bg-card p-6 shadow-lg border-glow lg:col-span-1">
             <h3 className="font-serif text-lg font-bold text-foreground">
               Life Predictions
             </h3>
@@ -214,7 +214,7 @@ export function DashboardSection() {
                 return (
                   <div
                     key={pred.en}
-                    className="rounded-xl border border-slate-300 bg-primary/5 p-4 transition-all hover:border-slate-600 hover:shadow-md"
+                    className="rounded-xl border border-primary/10 bg-primary/5 p-4 transition-all hover:border-primary/30 hover:shadow-md"
                   >
                     <div className="flex items-start gap-3">
                       <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-primary/15 text-primary">
