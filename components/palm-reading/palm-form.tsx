@@ -42,16 +42,24 @@ export function PalmForm({ onSubmit, isAnalyzing = false }: PalmFormProps) {
 
   const handleFileUpload = useCallback((e: ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
+    // Reset input value so selecting the same file again re-triggers onChange
+    e.target.value = '';
     if (file) {
-      // Check file size (max 5MB)
-      if (file.size > 5 * 1024 * 1024) {
-        setError('Image size must be less than 5MB');
+      if (!file.type.startsWith('image/')) {
+        setError('Please select a valid image file');
+        return;
+      }
+      if (file.size > 10 * 1024 * 1024) {
+        setError('Image size must be less than 10MB');
         return;
       }
       const reader = new FileReader();
-      reader.onloadend = () => {
+      reader.onload = () => {
         setImage(reader.result as string);
         setError('');
+      };
+      reader.onerror = () => {
+        setError('Failed to read image. Please try again.');
       };
       reader.readAsDataURL(file);
     }
@@ -242,6 +250,7 @@ export function PalmForm({ onSubmit, isAnalyzing = false }: PalmFormProps) {
           ) : (
             <div className="flex gap-3">
               <button
+                type="button"
                 onClick={() => fileInputRef.current?.click()}
                 disabled={isAnalyzing}
                 className="flex flex-1 flex-col items-center gap-2 rounded-xl border-2 border-dashed border-primary/25 bg-primary/5 px-4 py-8 text-muted-foreground transition-colors hover:border-primary/50 hover:text-foreground disabled:opacity-50"
@@ -250,6 +259,7 @@ export function PalmForm({ onSubmit, isAnalyzing = false }: PalmFormProps) {
                 <span className="text-sm">{t('palm.upload')}</span>
               </button>
               <button
+                type="button"
                 onClick={() => cameraInputRef.current?.click()}
                 disabled={isAnalyzing}
                 className="flex flex-1 flex-col items-center gap-2 rounded-xl border-2 border-dashed border-primary/25 bg-primary/5 px-4 py-8 text-muted-foreground transition-colors hover:border-primary/50 hover:text-foreground disabled:opacity-50"
