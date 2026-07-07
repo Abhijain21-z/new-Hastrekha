@@ -23,7 +23,7 @@ export const metadata: Metadata = {
   applicationName: "HastRekhaAI",
   creator: "HastRekhaAI Team",
   publisher: "HastRekhaAI",
-  metadataBase: new URL("https://hastrekhaa.com"),
+  metadataBase: new URL("https://www.hastrekhaai.online"),
   robots: {
     index: true,
     follow: true,
@@ -41,9 +41,8 @@ export const metadata: Metadata = {
       "Discover your destiny through AI-powered palm reading. अपने भाग्य को जानें AI-संचालित हस्तरेखा पढ़ाई से।",
     type: "website",
     locale: "en_US",
-    alternateLocale: ["hi_IN"],
     siteName: "HastRekhaAI",
-    url: "https://hastrekhaa.com",
+    url: "https://www.hastrekhaai.online",
   },
   twitter: {
     card: "summary_large_image",
@@ -52,11 +51,7 @@ export const metadata: Metadata = {
     creator: "@HastRekhaAI",
   },
   alternates: {
-    canonical: "https://hastrekhaa.com",
-    languages: {
-      en: "https://hastrekhaa.com/en",
-      hi: "https://hastrekhaa.com/hi",
-    },
+    canonical: "https://www.hastrekhaai.online",
   },
   category: "Astrology & Spirituality",
 };
@@ -76,10 +71,9 @@ export default function RootLayout({
         <meta name="apple-mobile-web-app-capable" content="yes" />
         <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
         <meta name="google-adsense-account" content="ca-pub-1067207431102415" />
-        <link rel="canonical" href="https://hastrekhaa.com" />
-        <link rel="alternate" hrefLang="en" href="https://hastrekhaa.com/en" />
-        <link rel="alternate" hrefLang="hi" href="https://hastrekhaa.com/hi" />
-        <link rel="alternate" hrefLang="x-default" href="https://hastrekhaa.com" />
+        <link rel="canonical" href="https://www.hastrekhaai.online" />
+        <link rel="icon" href="/favicon.png" type="image/png" />
+        <link rel="shortcut icon" href="/favicon.png" type="image/png" />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
