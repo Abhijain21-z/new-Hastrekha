@@ -1,6 +1,6 @@
 import React from "react"
 import type { Metadata } from "next";
-import { Inter, Playfair_Display } from "next/font/google";
+import { Inter, Playfair_Display, Noto_Sans_Devanagari } from "next/font/google";
 import { Analytics } from "@vercel/analytics/next";
 import "./globals.css";
 
@@ -12,6 +12,12 @@ const inter = Inter({
 const playfair = Playfair_Display({
   subsets: ["latin"],
   variable: "--font-playfair",
+});
+
+const notoDevanagari = Noto_Sans_Devanagari({
+  subsets: ["devanagari"],
+  variable: "--font-devanagari",
+  weight: ["400", "500", "600", "700"],
 });
 
 export const metadata: Metadata = {
@@ -82,7 +88,7 @@ export default function RootLayout({
               "@type": "LocalBusiness",
               "name": "HastRekhaAI",
               "description": "AI-powered palm reading and astrology predictions based on Hastrekha Vigyan",
-              "url": "https://hastrekhaa.com",
+              "url": "https://www.hastrekhaai.online",
               "serviceType": "Astrology & Palmistry",
               "areaServed": "Worldwide",
               "contactPoint": {
@@ -95,7 +101,7 @@ export default function RootLayout({
         <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1067207431102415" crossOrigin="anonymous"></script>
       </head>
       <body
-        className={`${inter.variable} ${playfair.variable} font-sans antialiased`}
+        className={`${inter.variable} ${playfair.variable} ${notoDevanagari.variable} font-sans antialiased`}
       >
         {children}
         <Analytics />
