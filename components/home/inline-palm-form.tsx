@@ -38,24 +38,15 @@ export function InlinePalmForm() {
 
   const handleFileUpload = (e: ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
-    // Reset input value so selecting the same file again re-triggers onChange
-    e.target.value = '';
     if (file) {
-      if (!file.type.startsWith('image/')) {
-        setError('Please select a valid image file');
-        return;
-      }
-      if (file.size > 10 * 1024 * 1024) {
-        setError('Image size must be less than 10MB');
+      if (file.size > 5 * 1024 * 1024) {
+        setError('Image size must be less than 5MB');
         return;
       }
       const reader = new FileReader();
-      reader.onload = () => {
+      reader.onloadend = () => {
         setImage(reader.result as string);
         setError('');
-      };
-      reader.onerror = () => {
-        setError('Failed to read image. Please try again.');
       };
       reader.readAsDataURL(file);
     }
@@ -168,9 +159,7 @@ export function InlinePalmForm() {
                 className="h-48 w-48 rounded-xl border border-primary/20 object-cover shadow-md"
               />
               <button
-                type="button"
                 onClick={() => setImage(null)}
-                aria-label="Remove image"
                 className="absolute -right-2 -top-2 flex h-6 w-6 items-center justify-center rounded-full bg-destructive text-destructive-foreground"
               >
                 <X className="h-3.5 w-3.5" />
@@ -179,20 +168,18 @@ export function InlinePalmForm() {
           ) : (
             <div className="flex gap-3">
               <button
-                type="button"
                 onClick={() => fileInputRef.current?.click()}
                 className="flex flex-1 flex-col items-center gap-2 rounded-xl border-2 border-dashed border-primary/25 bg-primary/5 px-4 py-8 text-muted-foreground transition-colors hover:border-primary/50 hover:text-foreground"
               >
                 <Upload className="h-8 w-8 text-primary/60" />
-                <span className="text-sm">{language === 'hi' ? 'गैलरी से चुनें' : 'Choose from Gallery'}</span>
+                <span className="text-sm">{language === 'hi' ? 'अपलोड करें' : 'Upload'}</span>
               </button>
               <button
-                type="button"
                 onClick={() => cameraInputRef.current?.click()}
                 className="flex flex-1 flex-col items-center gap-2 rounded-xl border-2 border-dashed border-primary/25 bg-primary/5 px-4 py-8 text-muted-foreground transition-colors hover:border-primary/50 hover:text-foreground"
               >
                 <Camera className="h-8 w-8 text-primary/60" />
-                <span className="text-sm">{language === 'hi' ? 'फोटो खींचें' : 'Take Photo'}</span>
+                <span className="text-sm">{language === 'hi' ? 'कैमरा' : 'Camera'}</span>
               </button>
             </div>
           )}
