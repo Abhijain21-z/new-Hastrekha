@@ -76,8 +76,8 @@ const config: Config = {
         sm: 'calc(var(--radius) - 4px)',
       },
       fontFamily: {
-        sans: ['var(--font-inter)'],
-        serif: ['var(--font-playfair)'],
+        sans: ['var(--font-inter)', 'var(--font-devanagari)', 'sans-serif'],
+        serif: ['var(--font-playfair)', 'var(--font-devanagari)', 'serif'],
       },
       keyframes: {
         'accordion-down': {

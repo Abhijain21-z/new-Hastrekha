@@ -38,15 +38,24 @@ export function InlinePalmForm() {
 
   const handleFileUpload = (e: ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
+    // Reset value so selecting the same file again re-triggers onChange
+    e.target.value = '';
     if (file) {
-      if (file.size > 5 * 1024 * 1024) {
-        setError('Image size must be less than 5MB');
+      if (!file.type.startsWith('image/')) {
+        setError('Please select a valid image file / कृपया एक मान्य छवि फ़ाइल चुनें');
+        return;
+      }
+      if (file.size > 10 * 1024 * 1024) {
+        setError('Image size must be less than 10MB / छवि 10MB से छोटी होनी चाहिए');
         return;
       }
       const reader = new FileReader();
       reader.onloadend = () => {
         setImage(reader.result as string);
         setError('');
+      };
+      reader.onerror = () => {
+        setError('Failed to read image. Please try again. / छवि पढ़ने में विफल। पुनः प्रयास करें।');
       };
       reader.readAsDataURL(file);
     }
@@ -168,28 +177,38 @@ export function InlinePalmForm() {
           ) : (
             <div className="flex gap-3">
               <button
+                type="button"
                 onClick={() => fileInputRef.current?.click()}
                 className="flex flex-1 flex-col items-center gap-2 rounded-xl border-2 border-dashed border-primary/25 bg-primary/5 px-4 py-8 text-muted-foreground transition-colors hover:border-primary/50 hover:text-foreground"
               >
                 <Upload className="h-8 w-8 text-primary/60" />
-                <span className="text-sm">{language === 'hi' ? 'अपलोड करें' : 'Upload'}</span>
+                <span className="text-sm">{language === 'hi' ? 'गैलरी से अपलोड करें' : 'Upload from Gallery'}</span>
               </button>
               <button
+                type="button"
                 onClick={() => cameraInputRef.current?.click()}
                 className="flex flex-1 flex-col items-center gap-2 rounded-xl border-2 border-dashed border-primary/25 bg-primary/5 px-4 py-8 text-muted-foreground transition-colors hover:border-primary/50 hover:text-foreground"
               >
                 <Camera className="h-8 w-8 text-primary/60" />
-                <span className="text-sm">{language === 'hi' ? 'कैमरा' : 'Camera'}</span>
+                <span className="text-sm">{language === 'hi' ? 'कैमरा से फोटो लें' : 'Take Photo'}</span>
               </button>
             </div>
           )}
-          <input ref={fileInputRef} type="file" accept="image/*" className="hidden" onChange={handleFileUpload} />
+          <input
+            ref={fileInputRef}
+            type="file"
+            accept="image/*"
+            className="sr-only"
+            aria-label="Upload palm image from gallery"
+            onChange={handleFileUpload}
+          />
           <input
             ref={cameraInputRef}
             type="file"
             accept="image/*"
             capture="environment"
-            className="hidden"
+            className="sr-only"
+            aria-label="Capture palm image with camera"
             onChange={handleFileUpload}
           />
         </div>

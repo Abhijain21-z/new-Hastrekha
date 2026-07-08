@@ -1,6 +1,6 @@
 import React from "react"
 import type { Metadata } from "next";
-import { Inter, Playfair_Display } from "next/font/google";
+import { Inter, Playfair_Display, Noto_Sans_Devanagari } from "next/font/google";
 import { Analytics } from "@vercel/analytics/next";
 import "./globals.css";
 
@@ -14,6 +14,12 @@ const playfair = Playfair_Display({
   variable: "--font-playfair",
 });
 
+const notoDevanagari = Noto_Sans_Devanagari({
+  subsets: ["devanagari"],
+  variable: "--font-devanagari",
+  weight: ["400", "500", "600", "700"],
+});
+
 export const metadata: Metadata = {
   title: "HastRekhaAI - AI हस्तरेखा पढ़ाई और ज्योतिष भविष्यवाणी | Hastrekha Vigyan",
   description:
@@ -23,7 +29,7 @@ export const metadata: Metadata = {
   applicationName: "HastRekhaAI",
   creator: "HastRekhaAI Team",
   publisher: "HastRekhaAI",
-  metadataBase: new URL("https://hastrekhaa.com"),
+  metadataBase: new URL("https://www.hastrekhaai.online"),
   robots: {
     index: true,
     follow: true,
@@ -41,9 +47,8 @@ export const metadata: Metadata = {
       "Discover your destiny through AI-powered palm reading. अपने भाग्य को जानें AI-संचालित हस्तरेखा पढ़ाई से।",
     type: "website",
     locale: "en_US",
-    alternateLocale: ["hi_IN"],
     siteName: "HastRekhaAI",
-    url: "https://hastrekhaa.com",
+    url: "https://www.hastrekhaai.online",
   },
   twitter: {
     card: "summary_large_image",
@@ -52,11 +57,7 @@ export const metadata: Metadata = {
     creator: "@HastRekhaAI",
   },
   alternates: {
-    canonical: "https://hastrekhaa.com",
-    languages: {
-      en: "https://hastrekhaa.com/en",
-      hi: "https://hastrekhaa.com/hi",
-    },
+    canonical: "https://www.hastrekhaai.online",
   },
   category: "Astrology & Spirituality",
 };
@@ -76,10 +77,9 @@ export default function RootLayout({
         <meta name="apple-mobile-web-app-capable" content="yes" />
         <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
         <meta name="google-adsense-account" content="ca-pub-1067207431102415" />
-        <link rel="canonical" href="https://hastrekhaa.com" />
-        <link rel="alternate" hrefLang="en" href="https://hastrekhaa.com/en" />
-        <link rel="alternate" hrefLang="hi" href="https://hastrekhaa.com/hi" />
-        <link rel="alternate" hrefLang="x-default" href="https://hastrekhaa.com" />
+        <link rel="canonical" href="https://www.hastrekhaai.online" />
+        <link rel="icon" href="/favicon.png" type="image/png" />
+        <link rel="shortcut icon" href="/favicon.png" type="image/png" />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
@@ -88,7 +88,7 @@ export default function RootLayout({
               "@type": "LocalBusiness",
               "name": "HastRekhaAI",
               "description": "AI-powered palm reading and astrology predictions based on Hastrekha Vigyan",
-              "url": "https://hastrekhaa.com",
+              "url": "https://www.hastrekhaai.online",
               "serviceType": "Astrology & Palmistry",
               "areaServed": "Worldwide",
               "contactPoint": {
@@ -101,7 +101,7 @@ export default function RootLayout({
         <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1067207431102415" crossOrigin="anonymous"></script>
       </head>
       <body
-        className={`${inter.variable} ${playfair.variable} font-sans antialiased`}
+        className={`${inter.variable} ${playfair.variable} ${notoDevanagari.variable} font-sans antialiased`}
       >
         {children}
         <Analytics />

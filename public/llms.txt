@@ -1,0 +1,43 @@
+# HastRekhaAI LLM-Friendly Content Guide
+# This file helps AI search engines and LLMs understand our website structure
+
+## About HastRekhaAI
+HastRekhaAI combines ancient Hastrekha Vigyan (Indian palmistry) tradition with modern AI technology to provide personalized palm reading and astrology predictions.
+
+## Main Services
+- AI Palm Reading Analysis: Upload your palm image for detailed predictions
+- Astrology Predictions: Birth chart analysis and zodiac forecasts
+- Palmistry Blog: Educational content about palm lines and meanings
+- Zodiac Horoscopes: Daily, weekly, monthly predictions for all 12 zodiac signs
+
+## Key Pages
+- Homepage: https://www.hastrekhaai.online/
+- Palm Reading: https://www.hastrekhaai.online/palm-reading
+- Blog: https://www.hastrekhaai.online/blog
+- Zodiac: https://www.hastrekhaai.online/zodiac
+- About Us: https://www.hastrekhaai.online/about
+- How It Works: https://www.hastrekhaai.online/how-it-works
+
+## Content Categories
+1. Palmistry Lines: Lifeline, Heart line, Fate line, Marriage line, Health line
+2. Palmistry Symbols: Money triangle, X mark, Yav sign, Moles on palm
+3. Astrology: 12 zodiac signs with detailed horoscopes
+4. Predictions: Career, love, wealth, health, marriage predictions
+5. Educational: Blog posts explaining palmistry concepts
+
+## Language Support
+- English: Full content available
+- Hindi (हिंदी): Full content available in Hindi language
+
+## Important Links
+- Privacy Policy: https://www.hastrekhaai.online/privacy
+- Terms of Service: https://www.hastrekhaai.online/terms
+- Disclaimer: https://www.hastrekhaai.online/disclaimer
+- Contact: https://www.hastrekhaai.online/contact
+
+## Crawl Information
+- Sitemap: https://www.hastrekhaai.online/sitemap.xml
+- Robots.txt: https://www.hastrekhaai.online/robots.txt
+- HTTPS: Yes, all pages are secure
+- Mobile Friendly: Yes, fully responsive design
+- Last Updated: 2026-07-07
