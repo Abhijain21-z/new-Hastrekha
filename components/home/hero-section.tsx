@@ -65,9 +65,9 @@ export function HeroSection() {
 
           {/* Bilingual title */}
           <h1 className="font-serif text-4xl font-bold leading-tight text-foreground md:text-5xl lg:text-6xl">
-            <span className="text-balance block">{t("hero.title.en")}</span>
-            <span className="text-balance mt-2 block text-3xl text-primary md:text-4xl lg:text-5xl">
-              {t("hero.title.hi")}
+            <span className="text-balance block">Your Palm. Your Patterns. Your AI Insight.</span>
+            <span className="mt-3 block text-balance text-2xl text-primary md:text-3xl lg:text-4xl">
+              आपकी हथेली, आपके संकेत, आपकी समझ
             </span>
           </h1>
 
@@ -77,11 +77,11 @@ export function HeroSection() {
           </div>
 
           {/* Bilingual subtitle */}
-          <p className="mt-5 max-w-2xl mx-auto text-base leading-relaxed text-muted-foreground lg:text-lg">
-            {t("hero.subtitle.en")}
+          <p className="mx-auto mt-5 max-w-2xl text-base leading-relaxed text-muted-foreground lg:text-lg">
+            Upload a clear photo of your palm and explore an easy-to-understand reading of your major palm lines with AI.
           </p>
-          <p className="mt-2 max-w-2xl mx-auto text-sm leading-relaxed text-muted-foreground/80 italic">
-            {t("hero.subtitle.hi")}
+          <p className="mx-auto mt-2 max-w-2xl text-sm leading-relaxed text-muted-foreground/80 italic">
+            अपनी हथेली की स्पष्ट तस्वीर अपलोड करें और AI के साथ प्रमुख रेखाओं को सरल भाषा में समझें।
           </p>
 
           <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:justify-center">

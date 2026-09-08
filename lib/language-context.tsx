@@ -2,7 +2,10 @@
 
 import {
   createContext,
+  useCallback,
   useContext,
+  useEffect,
+  useMemo,
   useState,
   type ReactNode,
 } from "react";
@@ -189,22 +192,103 @@ const translations: Record<string, Record<Language, string>> = {
   "report.planetary": { en: "Planetary Influence", hi: "\u0917\u094d\u0930\u0939\u0940\u092f \u092a\u094d\u0930\u092d\u093e\u0935" },
   "report.share": { en: "Share Report", hi: "\u0930\u093f\u092a\u094b\u0930\u094d\u091f \u0938\u093e\u091d\u093e \u0915\u0930\u0947\u0902" },
   "report.newReading": { en: "Get New Reading", hi: "\u0928\u092f\u093e \u092a\u0920\u0928 \u092a\u094d\u0930\u093e\u092a\u094d\u0924 \u0915\u0930\u0947\u0902" },
+
+  // Navigation extras
+  "nav.zodiac": { en: "Zodiac Signs", hi: "राशियाँ" },
+  "nav.search": { en: "Search", hi: "खोजें" },
+  "nav.menu": { en: "Open menu", hi: "मेनू खोलें" },
+  "nav.closeMenu": { en: "Close menu", hi: "मेनू बंद करें" },
+  "nav.language": { en: "Switch language", hi: "भाषा बदलें" },
+
+  // Footer extras
+  "footer.terms": { en: "Terms of Service", hi: "सेवा की शर्तें" },
+  "footer.cookies": { en: "Cookie Policy", hi: "कुकी नीति" },
+  "footer.editorial": { en: "Editorial Policy", hi: "संपादकीय नीति" },
+  "footer.explore": { en: "Explore", hi: "खोजें" },
+  "footer.company": { en: "About", hi: "हमारे बारे में" },
+  "footer.contactLine": { en: "Questions or corrections:", hi: "प्रश्न या सुधार के लिए:" },
+
+  // Common UI
+  "common.readMore": { en: "Read article", hi: "लेख पढ़ें" },
+  "common.readingTime": { en: "min read", hi: "मिनट पढ़ने का समय" },
+  "common.published": { en: "Published", hi: "प्रकाशित" },
+  "common.updated": { en: "Updated", hi: "अद्यतन" },
+  "common.share": { en: "Share", hi: "साझा करें" },
+  "common.copyLink": { en: "Copy link", hi: "लिंक कॉपी करें" },
+  "common.copied": { en: "Link copied", hi: "लिंक कॉपी हो गया" },
+  "common.tableOfContents": { en: "In this article", hi: "इस लेख में" },
+  "common.previous": { en: "Previous", hi: "पिछला" },
+  "common.next": { en: "Next", hi: "अगला" },
+  "common.related": { en: "Related reading", hi: "संबंधित लेख" },
+  "common.allArticles": { en: "All articles", hi: "सभी लेख" },
+  "common.viewAll": { en: "View all", hi: "सभी देखें" },
+  "common.home": { en: "Home", hi: "होम" },
+  "common.blog": { en: "Blog", hi: "ब्लॉग" },
+  "common.zodiac": { en: "Zodiac", hi: "राशि" },
+  "common.backHome": { en: "Back to home", hi: "होम पर वापस जाएँ" },
+  "common.search": { en: "Search articles and signs", hi: "लेख और राशियाँ खोजें" },
+  "common.searchPlaceholder": { en: "Try “heart line” or “Aries”…", hi: "जैसे “हृदय रेखा” या “मेष”…" },
+  "common.noResults": { en: "No results. Try another word.", hi: "कोई परिणाम नहीं। दूसरा शब्द आज़माएँ।" },
+  "common.results": { en: "results", hi: "परिणाम" },
+  "common.all": { en: "All", hi: "सभी" },
+  "common.otherSigns": { en: "Other signs", hi: "अन्य राशियाँ" },
+  "common.element": { en: "Element", hi: "तत्व" },
+  "common.rulingPlanet": { en: "Ruling planet", hi: "स्वामी ग्रह" },
+  "common.dates": { en: "Dates", hi: "तिथियाँ" },
+
+  // 404 / error
+  "notFound.title": { en: "This page is not in the lines", hi: "यह पृष्ठ रेखाओं में नहीं है" },
+  "notFound.desc": {
+    en: "The page you are looking for has moved or never existed. Here are a few places to continue.",
+    hi: "आप जो पृष्ठ खोज रहे हैं वह हटा दिया गया है या कभी मौजूद नहीं था। आगे बढ़ने के लिए कुछ रास्ते:",
+  },
+  "error.title": { en: "Something went wrong", hi: "कुछ गड़बड़ हो गई" },
+  "error.desc": {
+    en: "An unexpected error occurred while loading this page. You can try again or return home.",
+    hi: "इस पृष्ठ को लोड करते समय एक अनपेक्षित त्रुटि हुई। पुनः प्रयास करें या होम पर जाएँ।",
+  },
+  "error.retry": { en: "Try again", hi: "पुनः प्रयास करें" },
 };
 
 const LanguageContext = createContext<LanguageContextType | undefined>(undefined);
 
+const STORAGE_KEY = "hastrekha-language";
+
 export function LanguageProvider({ children }: { children: ReactNode }) {
-  const [language, setLanguage] = useState<Language>("hi");
+  const [language, setLanguageState] = useState<Language>("hi");
 
-  const t = (key: string): string => {
-    return translations[key]?.[language] || key;
-  };
+  // Restore the visitor's saved preference after hydration so server and
+  // client markup match on first paint.
+  useEffect(() => {
+    try {
+      const saved = window.localStorage.getItem(STORAGE_KEY);
+      if (saved === "en" || saved === "hi") setLanguageState(saved);
+    } catch {
+      /* storage unavailable (private mode) – keep default */
+    }
+  }, []);
 
-  return (
-    <LanguageContext.Provider value={{ language, setLanguage, t }}>
-      {children}
-    </LanguageContext.Provider>
+  useEffect(() => {
+    document.documentElement.lang = language;
+  }, [language]);
+
+  const setLanguage = useCallback((lang: Language) => {
+    setLanguageState(lang);
+    try {
+      window.localStorage.setItem(STORAGE_KEY, lang);
+    } catch {
+      /* ignore */
+    }
+  }, []);
+
+  const t = useCallback(
+    (key: string): string => translations[key]?.[language] || key,
+    [language],
   );
+
+  const value = useMemo(() => ({ language, setLanguage, t }), [language, setLanguage, t]);
+
+  return <LanguageContext.Provider value={value}>{children}</LanguageContext.Provider>;
 }
 
 export function useLanguage() {

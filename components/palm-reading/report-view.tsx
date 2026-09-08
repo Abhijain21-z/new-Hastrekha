@@ -42,7 +42,7 @@ function ReportCard({
   lang,
   borderClass = "border-primary/20",
 }: {
-  icon: React.ElementType;
+  icon: React.ComponentType<{ className?: string }>;
   numberEn: string;
   labelEn: string;
   labelHi: string;

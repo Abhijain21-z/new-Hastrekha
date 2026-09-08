@@ -1,7 +1,6 @@
 "use client";
 
-import React from "react"
-
+import React, { useTransition } from "react";
 import { PageShell } from "@/components/page-shell";
 import { StarField } from "@/components/zodiac-icons";
 import { Button } from "@/components/ui/button";
@@ -10,6 +9,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 import { Mail, MapPin, Clock, Send } from "lucide-react";
 import { useState } from "react";
+import { submitContactForm } from "@/app/actions/contact";
 
 const contactInfo = [
   {
@@ -34,11 +34,39 @@ const contactInfo = [
 
 export default function ContactPage() {
   const [submitted, setSubmitted] = useState(false);
+  const [error, setError] = useState("");
+  const [isPending, startTransition] = useTransition();
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    subject: "",
+    message: "",
+    honeypot: "",
+  });
+
+  function handleChange(
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) {
+    const { id, value } = e.currentTarget;
+    setFormData((prev) => ({ ...prev, [id]: value }));
+    setError("");
+  }
 
   function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
-    setSubmitted(true);
-    setTimeout(() => setSubmitted(false), 3000);
+    setError("");
+
+    startTransition(async () => {
+      const result = await submitContactForm(formData);
+
+      if (result.success) {
+        setSubmitted(true);
+        setFormData({ name: "", email: "", subject: "", message: "", honeypot: "" });
+        setTimeout(() => setSubmitted(false), 5000);
+      } else {
+        setError(result.message);
+      }
+    });
   }
 
   return (
@@ -52,7 +80,8 @@ export default function ContactPage() {
             Contact HastRekhaAI
           </h1>
           <p className="mt-4 text-lg leading-relaxed text-muted-foreground">
-            Have questions about your reading, feedback, or need support? We are here to help you on your spiritual journey. Reach out to us anytime!
+            Have questions about your reading, feedback, or need support? We are
+            here to help you on your spiritual journey. Reach out to us anytime!
           </p>
           <p className="mt-2 text-sm text-muted-foreground">
             We respond to all inquiries within 24 hours
@@ -85,7 +114,9 @@ export default function ContactPage() {
                         <p className="text-sm text-primary">{item.detail}</p>
                       </div>
                     </div>
-                    <p className="text-sm text-muted-foreground">{item.description}</p>
+                    <p className="text-sm text-muted-foreground">
+                      {item.description}
+                    </p>
                   </article>
                 );
               })}
@@ -118,52 +149,95 @@ export default function ContactPage() {
                   <h2 className="font-serif text-xl font-bold text-foreground">
                     Send Us a Message
                   </h2>
+
+                  {error && (
+                    <div className="rounded-lg bg-destructive/10 p-3 text-sm text-destructive">
+                      {error}
+                    </div>
+                  )}
+
                   <div className="grid gap-5 sm:grid-cols-2">
                     <div className="flex flex-col gap-2">
-                      <Label htmlFor="name" className="text-foreground">Full Name</Label>
+                      <Label htmlFor="name" className="text-foreground">
+                        Full Name
+                      </Label>
                       <Input
                         id="name"
                         placeholder="Your name"
+                        value={formData.name}
+                        onChange={handleChange}
+                        disabled={isPending}
                         required
                         className="border-border/50 bg-background text-foreground placeholder:text-muted-foreground"
                       />
                     </div>
                     <div className="flex flex-col gap-2">
-                      <Label htmlFor="email" className="text-foreground">Email Address</Label>
+                      <Label htmlFor="email" className="text-foreground">
+                        Email Address
+                      </Label>
                       <Input
                         id="email"
                         type="email"
                         placeholder="your@email.com"
+                        value={formData.email}
+                        onChange={handleChange}
+                        disabled={isPending}
                         required
                         className="border-border/50 bg-background text-foreground placeholder:text-muted-foreground"
                       />
                     </div>
                   </div>
+
                   <div className="flex flex-col gap-2">
-                    <Label htmlFor="subject" className="text-foreground">Subject</Label>
+                    <Label htmlFor="subject" className="text-foreground">
+                      Subject
+                    </Label>
                     <Input
                       id="subject"
                       placeholder="What is this regarding?"
+                      value={formData.subject}
+                      onChange={handleChange}
+                      disabled={isPending}
                       required
                       className="border-border/50 bg-background text-foreground placeholder:text-muted-foreground"
                     />
                   </div>
+
                   <div className="flex flex-col gap-2">
-                    <Label htmlFor="message" className="text-foreground">Message</Label>
+                    <Label htmlFor="message" className="text-foreground">
+                      Message
+                    </Label>
                     <Textarea
                       id="message"
                       placeholder="Tell us how we can help you..."
                       rows={5}
+                      value={formData.message}
+                      onChange={handleChange}
+                      disabled={isPending}
                       required
                       className="border-border/50 bg-background text-foreground placeholder:text-muted-foreground resize-none"
                     />
                   </div>
+
+                  {/* Honeypot field (hidden from real users) */}
+                  <input
+                    id="honeypot"
+                    type="text"
+                    value={formData.honeypot}
+                    onChange={handleChange}
+                    style={{ display: "none" }}
+                    tabIndex={-1}
+                    autoComplete="off"
+                    aria-hidden="true"
+                  />
+
                   <Button
                     type="submit"
-                    className="bg-primary text-primary-foreground hover:bg-primary/90"
+                    disabled={isPending}
+                    className="bg-primary text-primary-foreground hover:bg-primary/90 disabled:opacity-50"
                   >
                     <Send className="mr-2 h-4 w-4" />
-                    Send Message
+                    {isPending ? "Sending..." : "Send Message"}
                   </Button>
                 </form>
               )}
