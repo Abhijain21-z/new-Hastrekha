@@ -23,8 +23,8 @@ export function HeroSection() {
 
       <div className="relative mx-auto max-w-7xl px-4 lg:px-8">
         {/* Deity images row at top */}
-        <div className="mb-10 flex items-center justify-center gap-8 lg:gap-16">
-          <div className="relative h-24 w-24 overflow-hidden rounded-full border-2 border-slate-800 shadow-lg animate-glow-ring lg:h-32 lg:w-32 flex-shrink-0 animate-float" style={{ animationDelay: "0s" }}>
+        <div className="mb-10 flex items-center justify-center gap-4 sm:gap-8 lg:gap-14">
+          <div className="relative h-28 w-24 overflow-hidden rounded-xl border border-primary/70 bg-card shadow-[0_0_28px_hsl(var(--primary)/0.2)] sm:h-36 sm:w-32 lg:h-44 lg:w-40 flex-shrink-0 animate-float" style={{ animationDelay: "0s" }}>
             <Image
               src="/lord-ganesha.jpg"
               alt="Shri Ganesh Ji - Lord of wisdom and new beginnings"
@@ -42,7 +42,7 @@ export function HeroSection() {
               {"|| \u0913\u0902 \u0938\u0942\u0930\u094d\u092f\u093e\u092f \u0928\u092e\u0903 ||"}
             </span>
           </div>
-          <div className="relative h-24 w-24 overflow-hidden rounded-full border-2 border-slate-800 shadow-lg animate-glow-ring lg:h-32 lg:w-32 flex-shrink-0 animate-float" style={{ animationDelay: "1s" }}>
+          <div className="relative h-28 w-24 overflow-hidden rounded-xl border border-primary/70 bg-card shadow-[0_0_28px_hsl(var(--primary)/0.2)] sm:h-36 sm:w-32 lg:h-44 lg:w-40 flex-shrink-0 animate-float" style={{ animationDelay: "1s" }}>
             <Image
               src="/lord-surya.jpg"
               alt="Surya Dev - Lord Sun, ruler of planets and astrology"
