@@ -60,28 +60,28 @@ export function DashboardSection() {
       icon: Briefcase,
       en: "Career",
       hi: "\u0915\u0930\u093f\u092f\u0930",
-      descEn: "Strong growth after age 28",
+      descEn: "Traditional reading may suggest a period of change",
       descHi: "28 \u0935\u0930\u094d\u0937 \u0915\u0947 \u092c\u093e\u0926 \u092e\u091c\u092c\u0942\u0924 \u0935\u0943\u0926\u094d\u0927\u093f",
     },
     {
       icon: HeartHandshake,
       en: "Love",
       hi: "\u092a\u094d\u0930\u0947\u092e",
-      descEn: "Harmonious marriage indicated",
+      descEn: "Some practitioners read this as relationship themes",
       descHi: "\u0938\u0941\u0916\u0940 \u0935\u0948\u0935\u093e\u0939\u093f\u0915 \u091c\u0940\u0935\u0928 \u0915\u093e \u0938\u0902\u0915\u0947\u0924",
     },
     {
       icon: Stethoscope,
       en: "Health",
       hi: "\u0938\u094d\u0935\u093e\u0938\u094d\u0925\u094d\u092f",
-      descEn: "Long and healthy life path",
+      descEn: "Reflective wellbeing themes only; not health advice",
       descHi: "\u0926\u0940\u0930\u094d\u0918 \u0914\u0930 \u0938\u094d\u0935\u0938\u094d\u0925 \u091c\u0940\u0935\u0928",
     },
     {
       icon: Coins,
       en: "Wealth",
       hi: "\u0927\u0928",
-      descEn: "Financial stability after 30",
+      descEn: "Traditional themes around work and resources",
       descHi: "30 \u0915\u0947 \u092c\u093e\u0926 \u0906\u0930\u094d\u0925\u093f\u0915 \u0938\u094d\u0925\u093f\u0930\u0924\u093e",
     },
   ];
@@ -99,7 +99,7 @@ export function DashboardSection() {
             </span>
           </h2>
           <p className="mx-auto mt-4 max-w-2xl text-base leading-relaxed text-muted-foreground">
-            Discover what the lines on your palm reveal about your destiny, career, love, and health.
+            Explore traditional interpretations of palm lines as a starting point for self-reflection—not a prediction or professional advice.
           </p>
           <p className="mx-auto mt-1 max-w-2xl text-sm leading-relaxed text-muted-foreground/80 italic">
             {"\u091c\u093e\u0928\u093f\u090f \u0915\u093f \u0906\u092a\u0915\u0940 \u0939\u0925\u0947\u0932\u0940 \u0915\u0940 \u0930\u0947\u0916\u093e\u090f\u0902 \u0906\u092a\u0915\u0947 \u092d\u093e\u0917\u094d\u092f, \u0915\u0930\u093f\u092f\u0930, \u092a\u094d\u0930\u0947\u092e \u0914\u0930 \u0938\u094d\u0935\u093e\u0938\u094d\u0925\u094d\u092f \u0915\u0947 \u092c\u093e\u0930\u0947 \u092e\u0947\u0902 \u0915\u094d\u092f\u093e \u092c\u0924\u093e\u0924\u0940 \u0939\u0948\u0902\u0964"}

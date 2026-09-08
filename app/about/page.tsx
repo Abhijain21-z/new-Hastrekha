@@ -36,7 +36,7 @@ const features = [
   {
     icon: Zap,
     title: "AI-Powered Analysis",
-    description: "Advanced machine learning algorithms analyze your palm image with precision",
+    description: "AI-assisted pattern summaries are presented alongside traditional palmistry context.",
   },
   {
     icon: Users,
