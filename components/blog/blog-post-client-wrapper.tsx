@@ -4,6 +4,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { ArrowLeft, Calendar, Clock, User } from 'lucide-react';
 import { useLanguage } from '@/lib/language-context';
+import { ShareButton } from '@/components/blog/share-button';
 import { BlogPostClient } from '@/components/blog/blog-post-client';
 import type { Blog } from '@/lib/blogs-data';
 
@@ -117,7 +118,10 @@ export function BlogPostClientWrapper({
         </div>
 
         {/* Blog Description */}
-        <p className="mb-8 text-lg leading-relaxed text-muted-foreground">{description}</p>
+        <div className="mb-8 flex flex-col gap-5 border-b border-border pb-8 sm:flex-row sm:items-start sm:justify-between">
+          <p className="text-lg leading-relaxed text-muted-foreground">{description}</p>
+          <ShareButton title={title} />
+        </div>
 
         {/* Main Content with Language Support */}
         <BlogPostClient blog={blog} />

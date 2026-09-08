@@ -1,55 +1,12 @@
 "use client";
 
-import Image from "next/image";
 import Link from "next/link";
 import { Card } from "@/components/ui/card";
 
-interface ZodiacCardProps {
-  id: string;
-  name_en: string;
-  name_hi: string;
-  dates: string;
-  image: string;
-}
+interface ZodiacCardProps { id: string; name_en: string; name_hi: string; dates: string; image: string; }
 
-export function ZodiacCard({ id, name_en, name_hi, dates, image }: ZodiacCardProps) {
-  return (
-    <Link href={`/zodiac/${id}`}>
-      <Card className="group relative overflow-hidden border-primary/20 bg-gradient-to-b from-primary/5 to-background/50 p-6 transition-all duration-300 hover:border-primary/40 hover:shadow-lg hover:shadow-primary/10 cursor-pointer">
-        <div className="flex flex-col items-center gap-4">
-          {/* Zodiac Image */}
-          <div className="relative h-24 w-24 overflow-hidden rounded-lg border border-primary/20 bg-primary/5 shadow-md transition-transform duration-300 group-hover:scale-110">
-            <Image
-              src={image}
-              alt={name_en}
-              fill
-              sizes="96px"
-              className="object-contain p-2"
-            />
-          </div>
+const glyphs: Record<string, string> = { aries: "♈", taurus: "♉", gemini: "♊", cancer: "♋", leo: "♌", virgo: "♍", libra: "♎", scorpio: "♏", sagittarius: "♐", capricorn: "♑", aquarius: "♒", pisces: "♓" };
 
-          {/* Text Content */}
-          <div className="text-center">
-            {/* Hindi Name */}
-            <h3 className="font-serif text-sm font-bold text-primary mb-1">
-              {name_hi}
-            </h3>
-
-            {/* English Name */}
-            <p className="text-base font-semibold text-foreground mb-2">
-              {name_en}
-            </p>
-
-            {/* Dates */}
-            <p className="text-xs text-muted-foreground">
-              {dates}
-            </p>
-          </div>
-
-          {/* Hover Indicator */}
-          <div className="absolute inset-0 rounded-lg bg-primary/0 transition-colors duration-300 group-hover:bg-primary/5" />
-        </div>
-      </Card>
-    </Link>
-  );
+export function ZodiacCard({ id, name_en, name_hi, dates }: ZodiacCardProps) {
+  return <Link href={`/zodiac/${id}`}><Card className="group relative overflow-hidden border-border bg-card p-6 transition-all duration-300 hover:-translate-y-1 hover:border-primary/50 hover:shadow-lg hover:shadow-primary/10"><div className="flex flex-col items-center gap-4"><div className="flex h-24 w-24 items-center justify-center rounded-full border border-primary/30 bg-primary/5 text-5xl text-primary transition-transform duration-300 group-hover:scale-110" aria-label={`${name_en} zodiac symbol`}>{glyphs[id] ?? "✦"}</div><div className="text-center"><h3 className="mb-1 font-serif text-sm font-bold text-primary">{name_hi}</h3><p className="mb-2 text-base font-semibold text-foreground">{name_en}</p><p className="text-xs text-muted-foreground">{dates}</p></div><span className="text-xs font-semibold text-primary opacity-0 transition-opacity group-hover:opacity-100">Explore sign →</span></div></Card></Link>;
 }
