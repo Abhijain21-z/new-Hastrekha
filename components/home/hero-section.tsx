@@ -97,19 +97,9 @@ export function HeroSection() {
             </Link>
           </div>
 
-          {/* Trust indicators */}
-          <div className="mt-10 flex flex-wrap items-center justify-center gap-6">
-            {[
-              { value: "50K+", label: "Readings Done", labelHi: "\u092a\u0920\u0928 \u092a\u0942\u0930\u0947" },
-              { value: "4.8/5", label: "User Rating", labelHi: "\u0909\u092a\u092f\u094b\u0917\u0915\u0930\u094d\u0924\u093e \u0930\u0947\u091f\u093f\u0902\u0917" },
-              { value: "12+", label: "Report Sections", labelHi: "\u0930\u093f\u092a\u094b\u0930\u094d\u091f \u0905\u0928\u0941\u092d\u093e\u0917" },
-            ].map((stat) => (
-              <div key={stat.label} className="text-center">
-                <div className="text-lg font-bold text-primary">{stat.value}</div>
-                <div className="text-xs text-muted-foreground">{stat.label}</div>
-                <div className="text-[10px] text-muted-foreground/70">{stat.labelHi}</div>
-              </div>
-            ))}
+          <div className="mx-auto mt-10 max-w-xl rounded-xl border border-primary/20 bg-card/60 px-5 py-4 text-center">
+            <p className="text-sm font-medium text-foreground">Private, bilingual, and designed for self-reflection</p>
+            <p className="mt-1 text-xs text-muted-foreground">निजी, द्विभाषी और आत्म-चिंतन के लिए बनाया गया अनुभव</p>
           </div>
         </div>
 

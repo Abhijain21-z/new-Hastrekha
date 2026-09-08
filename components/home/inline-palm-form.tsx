@@ -31,6 +31,7 @@ export function InlinePalmForm() {
   const [dob, setDob] = useState('');
   const [birthTime, setBirthTime] = useState('');
   const [birthPlace, setBirthPlace] = useState('');
+  const [consent, setConsent] = useState(false);
   const [error, setError] = useState('');
   const [report, setReport] = useState<{ en: PredictionReport; hi: PredictionReport } | null>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
@@ -53,7 +54,7 @@ export function InlinePalmForm() {
   };
 
   const handleSubmit = async () => {
-    if (!name.trim() || !image || !dob || !birthTime || !birthPlace) {
+    if (!name.trim() || !image || !dob || !birthTime || !birthPlace || !consent) {
       setError('Please fill all fields and upload a palm image');
       return;
     }
@@ -81,12 +82,13 @@ export function InlinePalmForm() {
     setDob('');
     setBirthTime('');
     setBirthPlace('');
+    setConsent(false);
     setError('');
     setReport(null);
     setStage('form');
   };
 
-  const isValid = name.trim() && image && dob && birthTime && birthPlace;
+  const isValid = name.trim() && image && dob && birthTime && birthPlace && consent;
 
   if (stage === 'processing') {
     return <ProcessingScreen onComplete={() => {}} />;
@@ -239,6 +241,11 @@ export function InlinePalmForm() {
           />
         </div>
 
+        <label htmlFor="reading-consent" className="flex items-start gap-3 rounded-lg border border-primary/20 bg-primary/5 p-3 text-xs leading-relaxed text-muted-foreground">
+          <input id="reading-consent" type="checkbox" checked={consent} onChange={(e) => setConsent(e.target.checked)} className="mt-0.5 h-4 w-4 accent-primary" />
+          <span>I understand this is AI-generated entertainment and self-reflection, not medical, financial, legal, psychological, or professional advice. <a href="/privacy" className="text-primary underline">Privacy</a> and <a href="/terms" className="text-primary underline">Terms</a>.</span>
+        </label>
+
         {/* Submit */}
         <Button
           onClick={handleSubmit}
@@ -252,8 +259,8 @@ export function InlinePalmForm() {
 
         <p className="text-xs text-muted-foreground text-center">
           {language === 'hi'
-            ? '✨ आपकी गोपनीयता सुरक्षित है। कोई डेटा संग्रहीत नहीं किया जाता।'
-            : '✨ Your privacy is secure. No data is stored.'}
+            ? 'पढ़ने से पहले सहमति दें। कृपया संवेदनशील या किसी अन्य व्यक्ति की तस्वीर अपलोड न करें।'
+            : 'Please consent before reading. Do not upload sensitive images or someone else’s photo.'}
         </p>
       </div>
     </div>
