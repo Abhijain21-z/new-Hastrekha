@@ -52,6 +52,11 @@ const config: Config = {
           DEFAULT: 'hsl(var(--gold))',
           foreground: 'hsl(var(--gold-foreground))',
         },
+        ink: {
+          DEFAULT: 'hsl(var(--ink))',
+          foreground: 'hsl(var(--ink-foreground))',
+        },
+        'surface-2': 'hsl(var(--surface-2))',
         chart: {
           '1': 'hsl(var(--chart-1))',
           '2': 'hsl(var(--chart-2))',
@@ -76,9 +81,10 @@ const config: Config = {
         sm: 'calc(var(--radius) - 4px)',
       },
       fontFamily: {
-        sans: ['var(--font-inter)'],
-        serif: ['var(--font-playfair)'],
+        sans: ['var(--font-inter)', 'var(--font-devanagari)', 'system-ui', 'sans-serif'],
+        serif: ['var(--font-playfair)', 'var(--font-devanagari)', 'Georgia', 'serif'],
       },
+
       keyframes: {
         'accordion-down': {
           from: {
