@@ -40,7 +40,6 @@ export default function ZodiacPage() {
                 name_en={sign.name_en}
                 name_hi={sign.name_hi}
                 dates={sign.dates}
-                image={sign.image}
               />
             ))}
           </div>

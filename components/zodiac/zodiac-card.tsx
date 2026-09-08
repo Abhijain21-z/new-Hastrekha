@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { Card } from "@/components/ui/card";
 
-interface ZodiacCardProps { id: string; name_en: string; name_hi: string; dates: string; image: string; }
+interface ZodiacCardProps { id: string; name_en: string; name_hi: string; dates: string; }
 
 const glyphs: Record<string, string> = { aries: "♈", taurus: "♉", gemini: "♊", cancer: "♋", leo: "♌", virgo: "♍", libra: "♎", scorpio: "♏", sagittarius: "♐", capricorn: "♑", aquarius: "♒", pisces: "♓" };
 

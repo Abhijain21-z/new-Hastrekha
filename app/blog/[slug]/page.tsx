@@ -1,13 +1,12 @@
-import { Metadata } from 'next';
-import Image from 'next/image';
-import Link from 'next/link';
+import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import { SiteHeader } from '@/components/site-header';
 import { SiteFooter } from '@/components/site-footer';
 import { getBlogBySlug, getAllBlogSlugs, blogsData } from '@/lib/blogs-data';
 import { LanguageProvider } from '@/lib/language-context';
 import { BlogPostClientWrapper } from '@/components/blog/blog-post-client-wrapper';
-import { ArrowLeft, Calendar, Clock, User } from 'lucide-react';
+import { JsonLd } from '@/components/seo/json-ld';
+import { articleJsonLd, buildMetadata } from '@/lib/seo';
 
 interface BlogPostPageProps {
   params: Promise<{
@@ -33,19 +32,14 @@ export async function generateMetadata({ params }: BlogPostPageProps): Promise<M
     };
   }
 
-  return {
-    title: `${blog.title.en} | Hastrekha Palmistry`,
+  return buildMetadata({
+    path: `/blog/${blog.slug}`,
+    title: blog.title.en,
     description: blog.description.en,
     keywords: [...blog.keywords.en, 'palmistry', 'hastrekha'],
-    openGraph: {
-      title: blog.title.en,
-      description: blog.description.en,
-      images: [blog.imageUrl],
-      type: 'article',
-      publishedTime: blog.publishDate,
-      authors: [blog.author.en],
-    },
-  };
+    image: blog.imageUrl,
+    type: 'article',
+  });
 }
 
 export default async function BlogPostPage({ params }: BlogPostPageProps) {
@@ -63,6 +57,19 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
 
   return (
     <LanguageProvider>
+      <JsonLd
+        data={articleJsonLd({
+          title: blog.title.en,
+          description: blog.description.en,
+          path: `/blog/${blog.slug}`,
+          image: blog.imageUrl,
+          publishedTime: blog.publishDate,
+          modifiedTime: blog.updatedDate,
+          authorName: blog.author.en,
+          inLanguage: 'en',
+          keywords: blog.keywords.en,
+        })}
+      />
       <SiteHeader />
       <BlogPostClientWrapper blog={blog} previousBlog={previousBlog} nextBlog={nextBlog} />
       <SiteFooter />
