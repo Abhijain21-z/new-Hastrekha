@@ -91,7 +91,7 @@ export function InlinePalmForm() {
   const isValid = name.trim() && image && dob && birthTime && birthPlace && consent;
 
   if (stage === 'processing') {
-    return <ProcessingScreen onComplete={() => {}} />;
+    return <ProcessingScreen onComplete={() => setStage('report')} durationMs={15000} />;
   }
 
   if (stage === 'report' && report) {

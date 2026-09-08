@@ -6,11 +6,12 @@ import { useLanguage } from "@/lib/language-context";
 
 interface ProcessingScreenProps {
   onComplete: () => void;
+  durationMs?: number;
 }
 
-export function ProcessingScreen({ onComplete }: ProcessingScreenProps) {
+export function ProcessingScreen({ onComplete, durationMs = 15000 }: ProcessingScreenProps) {
   const { language } = useLanguage();
-  const [progress, setProgress] = useState(0);
+  const [progress, setProgress] = useState(1);
   const [currentStep, setCurrentStep] = useState(0);
 
   const steps = language === "hi" 
@@ -28,9 +29,9 @@ export function ProcessingScreen({ onComplete }: ProcessingScreenProps) {
       ];
 
   useEffect(() => {
-    const duration = 20000; // 20 seconds
+    const duration = durationMs;
     const interval = 50;
-    const increment = (100 / duration) * interval;
+    const increment = (99 / duration) * interval;
 
     const timer = setInterval(() => {
       setProgress((prev) => {
@@ -109,7 +110,14 @@ export function ProcessingScreen({ onComplete }: ProcessingScreenProps) {
         <div className="mb-1 flex justify-between text-xs text-muted-foreground">
           <span className="text-foreground font-medium">{Math.round(progress)}%</span>
         </div>
-        <div className="h-2 overflow-hidden rounded-full bg-muted border border-primary/20">
+        <div
+          className="h-2 overflow-hidden rounded-full bg-muted border border-primary/20"
+          role="progressbar"
+          aria-valuemin={1}
+          aria-valuemax={100}
+          aria-valuenow={Math.round(progress)}
+          aria-label={language === "hi" ? "रिपोर्ट तैयार होने की प्रगति" : "Report preparation progress"}
+        >
           <div
             className="h-full rounded-full bg-gradient-to-r from-primary to-primary/80 transition-all duration-200 ease-linear"
             style={{ width: `${progress}%` }}
