@@ -1,7 +1,10 @@
 "use client";
 
-import { LanguageProvider } from "@/lib/language-context";
 import { SiteHeader } from "@/components/site-header";
+import { JsonLd } from "@/components/seo/json-ld";
+import { TrustSection } from "@/components/home/trust-section";
+import { SEOContentSection } from "@/components/home/seo-content-section";
+import { FAQSection, faqJsonLdSchema } from "@/components/home/faq-section";
 import { SiteFooter } from "@/components/site-footer";
 import { HeroSection } from "@/components/home/hero-section";
 import { NameSection } from "@/components/home/name-section";
@@ -14,13 +17,16 @@ import { BlogHeadlineCarousel } from "@/components/home/blog-headline-carousel";
 
 export default function HomePage() {
   return (
-    <LanguageProvider>
+    <>
+      <JsonLd data={faqJsonLdSchema} />
       <SiteHeader />
       <BlogHeadlineCarousel />
       <main>
         <section id="hero">
           <HeroSection />
         </section>
+
+        <TrustSection />
 
         <section id="name-section">
           <NameSection />
@@ -40,6 +46,9 @@ export default function HomePage() {
           <FeaturesSection />
         </section>
 
+        <SEOContentSection />
+        <FAQSection />
+
         <section id="cta">
           <CTASection />
         </section>
@@ -49,6 +58,6 @@ export default function HomePage() {
         </section>
       </main>
       <SiteFooter />
-    </LanguageProvider>
+    </>
   );
 }
