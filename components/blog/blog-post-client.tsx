@@ -18,7 +18,7 @@ export function BlogPostClient({ blog }: BlogPostClientProps) {
   const contentSections = content.split('\n\n');
 
   return (
-    <article className="prose prose-lg max-w-none">
+    <article className="prose prose-base max-w-none leading-7 md:prose-lg md:leading-8">
       {contentSections.map((section, index) => {
         // Check if section is a heading (contains ### or #)
         if (section.startsWith('###')) {

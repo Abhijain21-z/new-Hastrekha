@@ -56,7 +56,7 @@ function BlogPageContent() {
                     <span className="text-xs text-muted-foreground">{blog.readTime} min</span>
                   </div>
 
-                  <h3 className="mb-2 line-clamp-2 text-lg font-bold text-foreground group-hover:text-primary">
+                  <h3 className="mb-2 line-clamp-3 text-[15px] font-bold leading-snug text-foreground group-hover:text-primary">
                     {language === 'hi' ? blog.title.hi : blog.title.en}
                   </h3>
 

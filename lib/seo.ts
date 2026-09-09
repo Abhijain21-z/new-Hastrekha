@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 
 export const siteConfig = {
   name: "HastRekhaAI",
-  url: "https://hastrekhaa.com",
+  url: "https://www.hastrekhaai.online",
   contactEmail: "abhijain.technical@gmail.com",
   description:
     "AI-assisted palm reading (Hastrekha Vigyan) and Vedic astrology guides in Hindi and English. Learn the lines of the palm, the twelve rashis, and how our free palm analysis works.",

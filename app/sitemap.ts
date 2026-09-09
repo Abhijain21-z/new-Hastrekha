@@ -17,7 +17,7 @@ const staticRoutes: { path: string; priority: number; changeFrequency: MetadataR
   { path: "/privacy", priority: 0.3, changeFrequency: "yearly" },
   { path: "/terms", priority: 0.3, changeFrequency: "yearly" },
   { path: "/disclaimer", priority: 0.3, changeFrequency: "yearly" },
-  { path: "/cookie-policy", priority: 0.3, changeFrequency: "yearly" },
+  { path: "/cookies", priority: 0.3, changeFrequency: "yearly" },
 ];
 
 export default function sitemap(): MetadataRoute.Sitemap {

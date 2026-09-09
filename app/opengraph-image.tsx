@@ -69,7 +69,7 @@ export default function OpenGraphImage() {
           paddingTop: 24,
         }}
       >
-        <span>hastrekhaa.com</span>
+        <span>www.hastrekhaai.online</span>
         <span>हस्तरेखा विज्ञान · ज्योतिष</span>
       </div>
     </div>,

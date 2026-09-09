@@ -41,7 +41,7 @@ const features = [
   {
     icon: Users,
     title: "Expert Guidance",
-    description: "Based on 5000+ years of palmistry tradition combined with modern science",
+    description: "Inspired by Indian palmistry traditions and presented as AI-assisted self-reflection.",
   },
 ];
 

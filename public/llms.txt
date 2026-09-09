@@ -1,0 +1,21 @@
+# HastRekhaAI
+
+> AI-assisted palmistry and Vedic astrology education in Hindi and English.
+
+## Important context
+- HastRekhaAI provides entertainment and self-reflection content, not medical, financial, legal, psychological, or professional advice.
+- Palmistry and astrology interpretations are traditional or cultural frameworks, not scientifically validated predictions.
+- AI-generated readings may be inaccurate and should not be used for important decisions.
+
+## Primary pages
+- [Home](https://www.hastrekhaai.online/): Product overview and palm-reading entry point.
+- [Palm reading](https://www.hastrekhaai.online/palm-reading): Submit a palm image and optional birth details for an AI-assisted reading.
+- [Blog](https://www.hastrekhaai.online/blog): Educational articles about palmistry traditions.
+- [Astrology guide](https://www.hastrekhaai.online/astrology-guide): Introductory Vedic astrology information.
+- [About](https://www.hastrekhaai.online/about): Service background and methodology.
+- [Privacy](https://www.hastrekhaai.online/privacy): Data handling information.
+- [Disclaimer](https://www.hastrekhaai.online/disclaimer): Accuracy and professional-advice limitations.
+- [Terms](https://www.hastrekhaai.online/terms): Terms of use.
+
+## Content principles
+We aim to describe traditional interpretations clearly, avoid guarantees, distinguish cultural belief from evidence, and encourage users to make important decisions with qualified professionals.

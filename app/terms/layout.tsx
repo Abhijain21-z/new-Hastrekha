@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Terms of Service - HastRekhaAI | Legal Terms & Conditions",
+  title: "Terms of Service | HastRekhaAI",
   description:
     "Review the Terms of Service for HastRekhaAI. Understand user responsibilities, limitations of liability, and acceptable use policies for our AI palm reading service.",
   keywords: "terms of service, terms and conditions, user agreement, acceptable use policy, legal terms",
