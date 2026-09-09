@@ -12,7 +12,7 @@ interface ProcessingScreenProps {
 export function ProcessingScreen({ onComplete, durationMs = 15000 }: ProcessingScreenProps) {
   const { language } = useLanguage();
   const [progress, setProgress] = useState(1);
-  const [currentStep, setCurrentStep] = useState(0);
+  const currentStep = progress < 25 ? 0 : progress < 50 ? 1 : progress < 75 ? 2 : 3;
 
   const steps = language === "hi" 
     ? [
@@ -46,14 +46,8 @@ export function ProcessingScreen({ onComplete, durationMs = 15000 }: ProcessingS
     }, interval);
 
     return () => clearInterval(timer);
-  }, [onComplete]);
+  }, [durationMs, onComplete]);
 
-  useEffect(() => {
-    if (progress < 25) setCurrentStep(0);
-    else if (progress < 50) setCurrentStep(1);
-    else if (progress < 75) setCurrentStep(2);
-    else setCurrentStep(3);
-  }, [progress]);
 
   return (
     <div className="flex min-h-[60vh] flex-col items-center justify-center px-4">

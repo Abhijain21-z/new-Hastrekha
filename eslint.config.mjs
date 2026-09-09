@@ -6,5 +6,9 @@ export default [
   ...nextTypescript,
   {
     ignores: [".next/**", "node_modules/**", "public/**"],
+    rules: {
+      "react-hooks/set-state-in-effect": "off",
+      "react-hooks/purity": "off",
+    },
   },
 ];

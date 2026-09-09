@@ -1,19 +1,20 @@
 'use client';
 
-import { useState, useCallback } from 'react';
+import { useState } from 'react';
 import { LanguageProvider, useLanguage } from '@/lib/language-context';
 import { SiteHeader } from '@/components/site-header';
 import { SiteFooter } from '@/components/site-footer';
 import { PalmForm } from '@/components/palm-reading/palm-form';
 import { ProcessingScreen } from '@/components/palm-reading/processing-screen';
 import { ReportView } from '@/components/palm-reading/report-view';
+import type { PredictionReport } from '@/lib/prediction-engine';
 
 type Stage = 'form' | 'processing' | 'report';
 
 function PalmReadingContent() {
   const { setLanguage } = useLanguage();
   const [stage, setStage] = useState<Stage>('form');
-  const [report, setReport] = useState<any>(null);
+  const [report, setReport] = useState<PredictionReport | null>(null);
   const [userName, setUserName] = useState('');
   const [isAnalyzing, setIsAnalyzing] = useState(false);
 
@@ -31,7 +32,7 @@ function PalmReadingContent() {
     dob: string;
     birthTime: string;
     birthPlace: string;
-    palmAnalysis?: any;
+    palmAnalysis?: PredictionReport;
   }) => {
     setIsAnalyzing(true);
     setUserName(data.name);

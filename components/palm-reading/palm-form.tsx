@@ -16,6 +16,7 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { useLanguage } from '@/lib/language-context';
+import type { PredictionReport } from '@/lib/prediction-engine';
 
 interface PalmFormProps {
   onSubmit: (data: {
@@ -24,7 +25,7 @@ interface PalmFormProps {
     dob: string;
     birthTime: string;
     birthPlace: string;
-    palmAnalysis?: any;
+    palmAnalysis?: PredictionReport;
   }) => void;
   isAnalyzing?: boolean;
 }
